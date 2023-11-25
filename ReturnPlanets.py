@@ -1,3 +1,6 @@
+# This program is a single-run if loop to determine whether a user entry is contained in either the planets
+#   or dwarf_planets string list objects
+
 # Lists of acceptable entries
 planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
 dwarf_planets = ["Pluto", "Ceres", "Makemake", "Haumea", "Eris"]
