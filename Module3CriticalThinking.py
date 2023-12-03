@@ -1,10 +1,12 @@
-# The Python script should have the name of the diagram as input and should output 
-# the names of the stakeholders and the number of communication pathways in your diagram.
+# The Python script should print out the names and number of pages of prototype and sequence
+# or flow of the pages.
 
-# Attempted to import, but UMLet UXF file isn't reading correctly
-# # Set up environment
-# import uxf
-# # a = uxf.load('Module2Option1.uxf')
 
-uxf = input('Name the Diagram and Press Enter\n')
-print('\n', uxf, '\nStakeholders: Amber\nBrad\nNumber of Communication Pathways: 2')
+print('\nNumber of Prototype Pages = 5',
+      '\nNumber of UML Pages = 1\n',
+      '\nUML diagram describes development architecture',
+      '\nPrototype Page 1 = Home Page',
+      '\nPrototype Page 2 = Existing Lists',
+      '\nPrototype Page 3 = Example List',
+      '\nPrototype Page 4 = Creating a New List',
+      '\nPrototype Page 5 = Finding Nearby Stores\n')
