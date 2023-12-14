@@ -1,0 +1,47 @@
+---
+title: 'Module 3 Critical Thinking Consolidated Document'
+author: 'David M Vermillion'
+date: today
+date-format: "D MMMM YYYY"
+format:
+    pdf:
+        toc: false
+        number-sections: false
+        include-in-header:
+            text: |
+                \addtokomafont{disposition}{\rmfamily}
+        fig-pos: 'H'
+jupyter: python3
+---
+
+
+# Python Code
+```{python}
+#| echo: true
+
+# The Python script should print out the names and number of pages of prototype 
+# and sequence or flow of the pages.
+
+print('\nNumber of Prototype Pages = 5',
+      '\nNumber of UML Pages = 1\n',
+      '\nUML diagram describes development architecture',
+      '\nPrototype Page 1 = Home Page',
+      '\nPrototype Page 2 = Existing Lists',
+      '\nPrototype Page 3 = Example List',
+      '\nPrototype Page 4 = Creating a New List',
+      '\nPrototype Page 5 = Finding Nearby Stores\n')
+```
+
+![Python Code Script Execution](Module3Execution.png)
+
+![Module 3 UML Diagram](Module3UML.png)
+
+![Home Page](ScreenPrototyping/HomePage.jpeg)
+
+![Home Page](ScreenPrototyping/List.jpeg)
+
+![Home Page](ScreenPrototyping/ExistingLists.jpeg)
+
+![Home Page](ScreenPrototyping/NewList.jpeg)
+
+![Home Page](ScreenPrototyping/StoreSearch.jpeg)

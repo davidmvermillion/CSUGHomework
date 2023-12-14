@@ -1,0 +1,34 @@
+---
+title: 'Module 4 Critical Thinking Consolidated Document'
+author: 'David M Vermillion'
+date: today
+date-format: "D MMMM YYYY"
+format:
+    pdf:
+        toc: false
+        number-sections: false
+        include-in-header:
+            text: |
+                \addtokomafont{disposition}{\rmfamily}
+        fig-pos: 'H'
+jupyter: python3
+---
+
+# Python Code
+```{python}
+#| echo: true
+
+# Write a Python Script that will print a brief description and 
+# names and number of the important steps in your program
+# No program. Attempts to clarify unsuccessful. Assuming intent to describe UML process.
+
+print('\nThree coding personality types: Iterator, Strategist, Mediator Personality',
+      '\nUsing the types as names, these are the number of steps per name:',
+      '\nName = Iterator          Key Steps = 5',
+      '\nName = Strategist        Key Steps = 6',
+      '\nName = Mediator          Key Steps = 8',)
+```
+
+![Python Code Script Execution](Module4Execution.png)
+
+![UML Diagram](Module4UMLDiagram.png)
