@@ -1,0 +1,36 @@
+---
+title: 'Module 5 Critical Thinking Consolidated Document'
+author: 'David M Vermillion'
+date: today
+date-format: "D MMMM YYYY"
+format:
+    pdf:
+        toc: false
+        number-sections: false
+        include-in-header:
+            text: |
+                \addtokomafont{disposition}{\rmfamily}
+        fig-pos: 'H'
+jupyter: python3
+---
+
+# Python Code
+```{python}
+#| echo: true
+
+# Use Python to write a script that will print out the different actors and use cases 
+# and a brief description of your diagram.
+
+print('\n  Actors  --  Use Case\n',
+      '\n  Citizen  --  Reports pothole',
+      '\n  City Council  --  Implements and oversees PTRS',
+      '\n  Foreman  --  Checks system for details to assign crew',
+      '\n  Repair Crew  --  Fixes pothole',
+      '\n  Local News  --  Informs public about success or failure of system\n',
+      '\nThis diagram shows how a citizen might find a pothole, submit it,',
+      '\n and it would be repaired.\n')
+```
+
+<!-- ![Python Code Script Execution](Module5Execution.png) -->
+
+![UML Diagram](Module5UMLDiagram.png)
