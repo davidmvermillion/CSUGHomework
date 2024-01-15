@@ -1,1 +1,82 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level></diagram>
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLSpecialState</id><coordinates><x>260</x><y>0</y><w>20</w><h>20</h></coordinates><panel_attributes>type=initial</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>190</x><y>50</y><w>160</w><h>60</h></coordinates><panel_attributes>ATM Waiting for Customer
+--
+Display Message
+"Please Insert Debit Card"</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>260</x><y>0</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>100</y><w>150</w><h>120</h></coordinates><panel_attributes>lt=&lt;-
+Customer arrives
+[Debit Card Inserted]
+/display message</panel_attributes><additional_attributes>10;100;10;10</additional_attributes></element><element><id>UMLState</id><coordinates><x>190</x><y>200</y><w>170</w><h>60</h></coordinates><panel_attributes>Customer Inserts Debit Card
+--
+Display Message
+"Please Enter PIN"</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>190</x><y>340</y><w>170</w><h>130</h></coordinates><panel_attributes>Balance &amp; Options Displayed
+--
+Display Message
+"Your Balance is $X,XXX.XX
+How Many Dollars Do You
+Wish to Withdraw? Please
+Select or Enter a Value in
+Multiples of $20."</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>330</x><y>230</y><w>250</w><h>100</h></coordinates><panel_attributes>lt=&lt;-
+PIN Entry
+[Unsuccessful PIN]
+/increment counter until 3</panel_attributes><additional_attributes>30;10;80;10;80;60;10;60;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>250</y><w>200</w><h>110</h></coordinates><panel_attributes>lt=&lt;-
+PIN Entry
+[Successful PIN &amp; Balance &gt; $0]
+/display message</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>90</y><w>140</w><h>80</h></coordinates><panel_attributes>lt=&lt;-
+Customer arrives
+[No Input]
+/no change</panel_attributes><additional_attributes>30;10;80;10;80;40;10;40;10;20</additional_attributes></element><element><id>UMLState</id><coordinates><x>520</x><y>130</y><w>180</w><h>90</h></coordinates><panel_attributes>Customer Lockout
+--
+Display Message
+"Too many invalid PIN Entries
+Please Contact Your Bank's
+Customer Service"</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>350</x><y>160</y><w>190</w><h>70</h></coordinates><panel_attributes>lt=&lt;-
+PIN Entry
+[4th Unsuccessful PIN]
+/lockout</panel_attributes><additional_attributes>170;20;70;20;70;50;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>430</x><y>60</y><w>190</w><h>90</h></coordinates><panel_attributes>lt=&lt;-
+Debit Card Removed
+[30 Seconds Later]
+/display waiting message</panel_attributes><additional_attributes>10;20;150;20;150;70</additional_attributes></element><element><id>UMLState</id><coordinates><x>560</x><y>320</y><w>180</w><h>70</h></coordinates><panel_attributes>Awaiting Debit Card Removal
+--
+Display Message
+"Please Remove Your
+Debit Card from the ATM"</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>210</y><w>180</w><h>130</h></coordinates><panel_attributes>lt=&lt;-
+Debit Card Still Present
+[30 Seconds Later]
+/display removal message</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>30</y><w>480</w><h>350</h></coordinates><panel_attributes>lt=&lt;-
+Debit Card Removed with No Cash Dispensed
+[30 Seconds Later]
+/display waiting message</panel_attributes><additional_attributes>10;40;10;20;350;20;350;330;320;330</additional_attributes></element><element><id>Relation</id><coordinates><x>350</x><y>320</y><w>230</w><h>70</h></coordinates><panel_attributes>lt=&lt;-
+Customer Exits
+[Exit Button Selected]
+/end process</panel_attributes><additional_attributes>210;20;70;20;70;50;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>350</x><y>370</y><w>230</w><h>80</h></coordinates><panel_attributes>lt=&lt;-
+Customer Withdraws Cash
+[Valid Cash Amount Entered]
+/display message</panel_attributes><additional_attributes>210;10;160;30;80;30;80;60;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>330</x><y>440</y><w>280</w><h>90</h></coordinates><panel_attributes>lt=&lt;-
+Customer Requests Cash Withdrawal
+[Amount Not a Multiple of $20]
+/re-display message</panel_attributes><additional_attributes>30;10;50;10;50;50;10;50;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>20</x><y>220</y><w>200</w><h>150</h></coordinates><panel_attributes>lt=&lt;-
+PIN Entry
+[Successful PIN &amp; Balance =&lt; $0]
+/display message</panel_attributes><additional_attributes>40;130;40;60;160;60;160;10;170;10</additional_attributes></element><element><id>UMLState</id><coordinates><x>0</x><y>350</y><w>150</w><h>100</h></coordinates><panel_attributes>Unservable Balance
+--
+Display Message
+"Your Balance is $0.00
+Please Contact Your Bank
+if You Believe this is
+Not Correct."</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLSpecialState</id><coordinates><x>420</x><y>70</y><w>20</w><h>20</h></coordinates><panel_attributes>type=final</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>120</x><y>380</y><w>500</w><h>210</h></coordinates><panel_attributes>lt=&lt;-
+Debit Card Still Present
+[30 Seconds Later]
+/display removal message</panel_attributes><additional_attributes>480;10;480;170;10;170;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>380</y><w>180</w><h>110</h></coordinates><panel_attributes>lt=&lt;-
+Cash Dispensing Logic
+[Cash Dispensed]
+/display removal message</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>UMLState</id><coordinates><x>610</x><y>470</y><w>180</w><h>70</h></coordinates><panel_attributes>Awaiting Cash Removal
+--
+Display Message
+"Please Remove Your
+Cash from the ATM"</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>620</x><y>530</y><w>170</w><h>110</h></coordinates><panel_attributes>lt=&lt;-
+Cash Removed
+[30 seconds later]
+/display waiting message</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>UMLSpecialState</id><coordinates><x>620</x><y>620</y><w>20</w><h>20</h></coordinates><panel_attributes>type=final</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>520</y><w>140</w><h>80</h></coordinates><panel_attributes>lt=&lt;-
+Cash Not Removed
+[No Input]
+/no change</panel_attributes><additional_attributes>30;10;80;10;80;40;10;40;10;20</additional_attributes></element></diagram>
