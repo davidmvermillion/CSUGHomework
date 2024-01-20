@@ -1,0 +1,38 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLSpecialState</id><coordinates><x>200</x><y>20</y><w>20</w><h>20</h></coordinates><panel_attributes>type=initial</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>160</x><y>70</y><w>100</w><h>40</h></coordinates><panel_attributes>Test Case
+--
+2149876530</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>20</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>UMLState</id><coordinates><x>160</x><y>190</y><w>100</w><h>60</h></coordinates><panel_attributes>Move Rightmost
+Digit Left by One
+--
+Loop</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>60</x><y>60</y><w>160</w><h>110</h></coordinates><panel_attributes>lt=&lt;-
+Number too low
+[&lt;123456789]
+/end</panel_attributes><additional_attributes>10;10;40;70;90;70;140;50</additional_attributes></element><element><id>UMLState</id><coordinates><x>20</x><y>30</y><w>100</w><h>40</h></coordinates><panel_attributes>Display Message
+--
+Invalid Entry</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>70</y><w>180</w><h>70</h></coordinates><panel_attributes>lt=&lt;-
+Max value
+[&gt;=9876543210]
+/end</panel_attributes><additional_attributes>160;10;160;30;10;30</additional_attributes></element><element><id>UMLState</id><coordinates><x>340</x><y>30</y><w>150</w><h>50</h></coordinates><panel_attributes>Display Message
+--
+No Larger Value Possible</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>220</y><w>200</w><h>80</h></coordinates><panel_attributes>lt=&lt;-
+Digit moves
+[Value &lt; test case]
+/no change</panel_attributes><additional_attributes>30;10;80;10;80;40;10;40;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>100</y><w>170</w><h>110</h></coordinates><panel_attributes>lt=&lt;-
+Valid test case
+[Value in Range]
+/pass to calculation loop</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>UMLState</id><coordinates><x>10</x><y>190</y><w>110</w><h>60</h></coordinates><panel_attributes>Display Message
+--
+[New Value] &gt;
+Test Case</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>60</x><y>240</y><w>140</w><h>80</h></coordinates><panel_attributes>lt=&lt;-
+Value found
+[Value &gt; Test Case]
+/end</panel_attributes><additional_attributes>10;10;30;40;110;40;120;10</additional_attributes></element><element><id>UMLState</id><coordinates><x>140</x><y>340</y><w>140</w><h>70</h></coordinates><panel_attributes>Move nth Rightmost
+Digit Left by One
+--
+Loop on Test Case
+Initial Value</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>190</x><y>240</y><w>170</w><h>120</h></coordinates><panel_attributes>lt=&lt;-
+Value not found
+[Rightmost -&gt; Leftmost]
+/pass to calculation loop</panel_attributes><additional_attributes>10;100;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>20</x><y>240</y><w>140</w><h>160</h></coordinates><panel_attributes>lt=&lt;-
+Value found
+[Value &gt; Test Case]
+/end</panel_attributes><additional_attributes>10;10;10;120;120;120</additional_attributes></element></diagram>
