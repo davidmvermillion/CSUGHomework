@@ -73,3 +73,12 @@ class HashTable:
 			return True
 		except KeyError: 
 			return False
+	
+	def __str__(self): 
+		elements = [] 
+		for i in range(self.capacity): 
+			current = self.table[i] 
+			while current: 
+				elements.append((current.key, current.value)) 
+				current = current.next
+		return str(elements) 
