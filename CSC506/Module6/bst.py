@@ -13,9 +13,8 @@ class Tree:
     def __init__(self):
         self.root = []
     
-    def build_tree(self):
-        if self.root is None:
-            self.root = Node
+    def build_tree(list):
+        for current_node in list:
             while current_node is not None: 
                 if Node.key < current_node.key:
                     # If there is no left child, add the new
@@ -35,30 +34,28 @@ class Tree:
                         current_node = None
                     else:
                         current_node = current_node.right
-        else:
-            current_node = self.root
-            while current_node is not None: 
-                if Node.key < current_node.key:
-                    # If there is no left child, add the new
-                    # Node here; otherwise repeat from the
-                    # left child.
-                    if current_node.left is None:
-                        current_node.left = Node
-                        current_node = None
+            else:
+                current_node = self.root
+                while current_node is not None: 
+                    if Node.key < current_node.key:
+                        # If there is no left child, add the new
+                        # Node here; otherwise repeat from the
+                        # left child.
+                        if current_node.left is None:
+                            current_node.left = Node
+                            current_node = None
+                        else:
+                            current_node = current_node.left
                     else:
-                        current_node = current_node.left
-                else:
-                    # If there is no right child, add the new
-                    # Node here; otherwise repeat from the
-                    # right child.
-                    if current_node.right is None:
-                        current_node.right = Node
-                        current_node = None
-                    else:
-                        current_node = current_node.right
-
-
-        return self.root
+                        # If there is no right child, add the new
+                        # Node here; otherwise repeat from the
+                        # right child.
+                        if current_node.right is None:
+                            current_node.right = Node
+                            current_node = None
+                        else:
+                            current_node = current_node.right
+            return list.root
     
     def search(self, desired_key):
         current_node = self.root
