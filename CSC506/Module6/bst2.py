@@ -67,6 +67,63 @@ class Tree(object):
             else:
                 root.left = insert(root.left, key)
         return root
+    
+    # https://www.geeksforgeeks.org/deletion-in-binary-search-tree/
+    def delete(root, key):
+        # Base case
+        if root is None:
+            return root
+    
+        # Recursive calls for ancestors of
+        # node to be deleted
+        if root.val > key:
+            root.left = delete(root.left, key)
+            return root
+        elif root.val < key:
+            root.right = delete(root.right, key)
+            return root
+    
+        # We reach here when root is the node
+        # to be deleted.
+    
+        # If one of the children is empty
+        if root.left is None:
+            temp = root.right
+            del root
+            return temp
+        elif root.right is None:
+            temp = root.left
+            del root
+            return temp
+    
+        # If both children exist
+        else:
+    
+            succParent = root
+    
+            # Find successor
+            succ = root.right
+            while succ.left is not None:
+                succParent = succ
+                succ = succ.left
+    
+            # Delete successor.  Since successor
+            # is always left child of its parent
+            # we can safely make successor's right
+            # right child as left of its parent.
+            # If there is no succ, then assign
+            # succ.right to succParent.right
+            if succParent != root:
+                succParent.left = succ.right
+            else:
+                succParent.right = succ.right
+    
+            # Copy Successor Data to root
+            root.val = succ.val
+    
+            # Delete Successor and return root
+            del succ
+            return root
 
 # Second definition required for Tree class to recognize existence of following functions
 def printTree(root):
@@ -100,55 +157,59 @@ def insert(root, key):
             root.left = insert(root.left, key)
     return root
 
-
-# https://csuglobal.instructure.com/courses/87885/external_tools/51766
-def delete(self, key):
-    parent = None
-    current_node = self.root
-    
-    # Search for the Node.
-    while current_node is not None:
-    
-        # Check if current_node has a matching key.
-        if current_node.key == key: 
-            if current_node.left is None and current_node.right is None:   # Case 1
-                if parent is None: # Node is root
-                    self.root = None
-                elif parent.left is current_node: 
-                    parent.left = None
-                else:
-                    parent.right = None
-                return  # Node found and removed
-            elif current_node.left is not None and current_node.right is None:  # Case 2
-                if parent is None: # Node is root
-                    self.root = current_node.left
-                elif parent.left is current_node: 
-                    parent.left = current_node.left
-                else:
-                    parent.right = current_node.left
-                return  # Node found and removed
-            elif current_node.left is None and current_node.right is not None:  # Case 2
-                if parent is None: # Node is root
-                    self.root = current_node.right
-                elif parent.left is current_node:
-                    parent.left = current_node.right
-                else:
-                    parent.right = current_node.right
-                return  # Node found and removed
-            else:                                    # Case 3
-                # Find successor (leftmost child of right subtree)
-                successor = current_node.right
-                while successor.left is not None:
-                    successor = successor.left
-                current_node.key = successor.key      # Copy successor to current Node
-                parent = current_node
-                current_node = current_node.right     # Remove successor from right subtree
-                key = parent.key                      # Loop continues with new key
-        elif current_node.key < key: # Search right
-            parent = current_node
-            current_node = current_node.right
-        else:                        # Search left
-            parent = current_node
-            current_node = current_node.left
-            
-    return # Node not found
+# https://www.geeksforgeeks.org/deletion-in-binary-search-tree/
+def delete(root, key):
+    # Base case
+    if root is None:
+        return root
+ 
+    # Recursive calls for ancestors of
+    # node to be deleted
+    if root.val > key:
+        root.left = delete(root.left, key)
+        return root
+    elif root.val < key:
+        root.right = delete(root.right, key)
+        return root
+ 
+    # We reach here when root is the node
+    # to be deleted.
+ 
+    # If one of the children is empty
+    if root.left is None:
+        temp = root.right
+        del root
+        return temp
+    elif root.right is None:
+        temp = root.left
+        del root
+        return temp
+ 
+    # If both children exist
+    else:
+ 
+        succParent = root
+ 
+        # Find successor
+        succ = root.right
+        while succ.left is not None:
+            succParent = succ
+            succ = succ.left
+ 
+        # Delete successor.  Since successor
+        # is always left child of its parent
+        # we can safely make successor's right
+        # right child as left of its parent.
+        # If there is no succ, then assign
+        # succ.right to succParent.right
+        if succParent != root:
+            succParent.left = succ.right
+        else:
+            succParent.right = succ.right
+ 
+        # Copy Successor Data to root
+        root.val = succ.val
+ 
+        # Delete Successor and return root
+        del succ
+        return root
