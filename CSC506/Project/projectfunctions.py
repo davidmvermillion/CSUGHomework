@@ -156,4 +156,4 @@ def F_2samp_var_data(data1, data2, alternative='two-sided'):
         pval = dist.sf(test)
     else:
         pval = 2 * min(dist.cdf(test),dist.sf(test))
-    return test, pval
+    return test, '%.2f' %  pval
