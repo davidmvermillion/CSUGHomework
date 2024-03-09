@@ -1,0 +1,107 @@
+---
+title: 'Analysis of Algorithms and Data Structures for Meteorite Impact Classification'
+author: 'David M Vermillion'
+university: 'Colorado State University Global'
+class: 'CSC 506-1'
+instructor: 'Dr. Dong Nguyen'
+date: March 10, 2024
+date-format: "MMMM D, YYYY"
+format:
+    pdf:
+        toc: true
+        number-sections: false
+        include-in-header:
+            text: |
+                \addtokomafont{disposition}{\rmfamily}
+        fig-pos: 'H'
+jupyter: python3
+---
+
+```{python}
+#| echo: false
+
+# Workspace initialization
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+import projectfunctions as pf
+# import numpy as np
+import pandas as pd
+# import matplotlib.pyplot as plt
+# from scipy.interpolate import interp1d
+# from IPython.display import Markdown as md
+
+# Import data files
+heap_id = pf.read_list('heapsort_id')
+heap_mass = pf.read_list('heapsort_mass')
+heap_name = pf.read_list('heapsort_name')
+heap_reclat = pf.read_list('heapsort_reclat')
+heap_reclong = pf.read_list('heapsort_reclong')
+heap_year = pf.read_list('heapsort_year')
+
+merge_id = pf.read_list('mergesort_id')
+merge_mass = pf.read_list('mergesort_mass')
+merge_name = pf.read_list('mergesort_name')
+merge_reclat = pf.read_list('mergesort_reclat')
+merge_reclong = pf.read_list('mergesort_reclong')
+merge_year = pf.read_list('mergesort_year')
+
+quick_id = pf.read_list('quicksort_id')
+quick_mass = pf.read_list('quicksort_mass')
+quick_name = pf.read_list('quicksort_name')
+quick_reclat = pf.read_list('quicksort_reclat')
+quick_reclong = pf.read_list('quicksort_reclong')
+quick_year = pf.read_list('quicksort_year')
+
+stable_id = pf.read_list('stablesort_id')
+stable_mass = pf.read_list('stablesort_mass')
+stable_name = pf.read_list('stablesort_name')
+stable_reclat = pf.read_list('stablesort_reclat')
+stable_reclong = pf.read_list('stablesort_reclong')
+stable_year = pf.read_list('stablesort_year')
+
+# Prep data
+id_sum = pd.concat([heap_id, merge_id, quick_id, stable_id])
+mass_sum = pd.concat([heap_mass, merge_mass, quick_mass, stable_mass])
+name_sum = pd.concat([heap_name, merge_name, quick_name, stable_name])
+reclat_sum = pd.concat([heap_reclat, merge_reclat, quick_reclat, stable_reclat])
+reclong_sum = pd.concat([heap_reclong, merge_reclong, quick_reclong, stable_reclong])
+year_sum = pd.concat([heap_year, merge_year, quick_year, stable_year])
+
+exception_sum = pd.concat([mass_sum, name_sum, reclat_sum, reclong_sum, year_sum])
+
+columns = pd.DataFrame([])
+columns['id'], columns['mass'], columns['name'], columns['reclat'], columns['reclong'], columns['year'] = id_sum, mass_sum, name_sum, reclat_sum, reclong_sum, year_sum
+# Z-Score Normalization
+# https://www.geeksforgeeks.org/data-normalization-with-pandas/
+for column in columns.columns: 
+    columns[column] = (columns[column] -
+                           columns[column].mean()) / columns[column].std()
+
+exception_sum_z = pd.concat([columns['mass'], columns['name'], columns['reclat'], columns['reclong'], columns['year']])
+
+heap = pd.concat([heap_id, heap_mass, heap_name, heap_reclat, heap_reclong, heap_year])
+merge = pd.concat([merge_id, merge_mass, merge_name, merge_reclat, merge_reclong, merge_year])
+quick = pd.concat([quick_id, quick_mass, quick_name, quick_reclat, quick_reclong, quick_year])
+stable = pd.concat([stable_id, stable_mass, stable_name, stable_reclat, stable_reclong, stable_year])
+
+heapless = pd.concat([merge, quick, stable])
+mergeless = pd.concat([heap, quick, stable])
+quickless = pd.concat([heap, merge, stable])
+stableless = pd.concat([heap, quick, merge])
+
+algorithms = pd.DataFrame([])
+algorithms['heap'], algorithms['merge'], algorithms['quick'], algorithms['stable'] = heap, merge, quick, stable
+for column in algorithms.columns: 
+    algorithms[column] = (algorithms[column] -
+                           algorithms[column].mean()) / algorithms[column].std()
+
+
+```
+
+\newpage
+
+# Test Title
+
+asdfasdf
+
+![QQ Plot](images/heap_id%20qqplot.png)
