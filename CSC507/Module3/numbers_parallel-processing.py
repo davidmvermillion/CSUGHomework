@@ -15,23 +15,19 @@ length4 = list(range(750000,1000000))
 
 # Create function
 def loop(length):
+    file = open('CSC507/Module3/file2.txt', 'a')
     for i in length:
         file.write('\n')
         file.write(str(int(random.random()*1000)))
 
-# Create file
-file = open('CSC507/Module3/file2.txt', 'x')
-file.write(str(int(random.random()*1000)))
-file.close()
-
 # Change file access type
 file = open('CSC507/Module3/file2.txt', 'a')
 
-# https://www.geeksforgeeks.org/multiprocessing-python-set-1/
+# https://www.geeksforgeeks.org/parallel-processing-in-python/
 # Parallel processing write loop
 if __name__ == '__main__': 
 	pool = multiprocessing.Pool() 
-	pool = multiprocessing.Pool(processes=4) 
+	pool = multiprocessing.Pool(processes = 8) 
 	inputs = [length1, length2, length3, length4] 
 	outputs = pool.map(loop, inputs) 
 
