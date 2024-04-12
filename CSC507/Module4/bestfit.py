@@ -16,6 +16,7 @@ def BestFit(blocks, processes):
     blocksize = len(blocks)
     processsize = len(processes)
     allocation = [-1] * processsize
+    
     for i in range(processsize):
         BestFitIndex = -1
         for j in range(blocksize):
