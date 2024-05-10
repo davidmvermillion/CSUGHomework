@@ -5,6 +5,7 @@ import multiprocessing
 # import time 
 import numpy as np
 import re
+# https://www.reddit.com/r/learnpython/comments/7bnaf1/comment/dpjiupw/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 import os
 import sys
 os.chdir( os.path.dirname( sys.argv[0] ) )
