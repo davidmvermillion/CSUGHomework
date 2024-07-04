@@ -10,13 +10,12 @@ from math import pi
 from os import walk, path, chdir
 from os.path import abspath, dirname
 
-# https://stackoverflow.com/a/69556612/13801562
 # Set directory to current script location
+# https://stackoverflow.com/a/69556612/13801562
 chdir(dirname(abspath(__file__)))
 
 # Functions
 # https://www.tutorialspoint.com/file-searching-using-python
-
 def find_files(filename, search_path):
    result = []
 
@@ -31,38 +30,35 @@ def find_files(filename, search_path):
    return str(result)
 
 def grain_orientation(radians):
-    if radians >= pi/2 and radians <= 2*pi/3 or radians >= 4/3*pi and radians <= 5/3*pi:
+    if radians >= pi/3 and radians <= 2*pi/3 or radians >= 4/3*pi and radians <= 5/3*pi:
         return 'Vertical'
     else:
         return 'not Vertical'
-    
+
 # https://stackoverflow.com/a/23326219/13801562
 def number():
     while True:
         try:
-            chosen_number = int(input('Choose a whole number between 1 and 15,000\n'))
+            chosen_number = int(input('\nChoose a whole number between 1 and 15,000\n\n'))
             break
         except:
-            print('Your answer must be an integer between 1 and 15,000. Try again!')
+            print('Your answer must be an integer between 1 and 15,000. Try again!\n')
     return chosen_number
 
 def rice_options():
     while True:
         try:
-            rice = input('Choose one of the following rice varietals:\nArborio\nBasmati\nIpsala\nJasmine\nKaracadag\n')
+            rice = input('\nChoose one of the following rice varietals:\nArborio\nBasmati\nIpsala\nJasmine\nKaracadag\n\n')
             break
         except:
-            print('Your answer must be one of the following rice varietals:\nArborio\nBasmati\nIpsala\nJasmine\nKaracadag\n')
+            print('\nYour answer must be one of the following rice varietals:\nArborio\nBasmati\nIpsala\nJasmine\nKaracadag\n\n')
     return rice
 
 # User Input Intermediate values
 image_number = number()
 rice_choice = rice_options()
 file = find_files('{} ({}).jpg'.format(rice_choice, image_number), 'Rice_Image_Dataset')
-
-print(image_number)
-print(rice_choice)
-print(file)
+print('\nThis should take between 1 and 10 seconds per query.\nPlease close any chart programs before running your next query to reset the script.\n')
 
 # Data Prep
 image_rgb = imread(str(file))
@@ -95,9 +91,10 @@ image_rgb[vertical_line] = (246, 194, 139)
 
 # Plot the rice grain and ellipse
 fig, ax = plt.subplots()
-ax.set_title('Rice Grain Elliptical Approximation\n${:.0f}\\degree$ from Vertical Axis\n$\\therefore$ this {} Grain is {}'.format((degrees(orientation) - 90), rice_choice, grain_orientation(orientation)),
+ax.set_title('Rice Grain Elliptical Approximation\n${:.0f}\\degree$ from Vertical Axis\n$\\therefore$ this {} Grain is {}'.format((degrees(orientation) + 90), rice_choice, grain_orientation(orientation + 90)),
              fontsize = 20, pad = 15).set_color('#171819')
 ax.imshow(image_rgb)
 # https://stackoverflow.com/a/25864515/13801562
 ax.axis('off')
+plt.tight_layout()
 plt.show()
