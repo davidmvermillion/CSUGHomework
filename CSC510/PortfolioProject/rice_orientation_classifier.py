@@ -58,7 +58,7 @@ def rice_options():
 image_number = number()
 rice_choice = rice_options()
 file = find_files('{} ({}).jpg'.format(rice_choice, image_number), 'Rice_Image_Dataset')
-print('\nThis should take between 1 and 10 seconds per query.\nPlease close any chart programs before running your next query to reset the script.\n')
+print('\nThis should take between 1 and 10 seconds per query.\nPlease close any chart programs from this query to reset the script before running your next query.\n')
 
 # Data Prep
 image_rgb = imread(str(file))
@@ -91,7 +91,7 @@ image_rgb[vertical_line] = (246, 194, 139)
 
 # Plot the rice grain and ellipse
 fig, ax = plt.subplots()
-ax.set_title('Rice Grain Elliptical Approximation\n${:.0f}\\degree$ from Vertical Axis\n$\\therefore$ this {} Grain is {}'.format((degrees(orientation) + 90), rice_choice, grain_orientation(orientation + 90)),
+ax.set_title('Rice Grain Elliptical Approximation\n${:.0f}\\degree$ from Vertical Axis\n$\\therefore$ this {} Grain is {}'.format((degrees(orientation) + 90), rice_choice, grain_orientation(orientation)),
              fontsize = 20, pad = 15).set_color('#171819')
 ax.imshow(image_rgb)
 # https://stackoverflow.com/a/25864515/13801562
