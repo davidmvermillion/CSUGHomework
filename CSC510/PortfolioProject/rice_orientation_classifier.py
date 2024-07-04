@@ -1,13 +1,18 @@
 # Setup
 import matplotlib.pyplot as plt
-from skimage import color, img_as_ubyte
+from skimage import color
 from skimage.feature import canny
 from skimage.transform import hough_ellipse
 from skimage.draw import ellipse_perimeter, line
 from skimage.io import imread
 from math import degrees
 from math import pi
-from os import walk, path
+from os import walk, path, chdir
+from os.path import abspath, dirname
+
+# https://stackoverflow.com/a/69556612/13801562
+# Set directory to current script location
+chdir(dirname(abspath(__file__)))
 
 # Functions
 # https://www.tutorialspoint.com/file-searching-using-python
@@ -35,7 +40,7 @@ def grain_orientation(radians):
 def number():
     while True:
         try:
-            chosen_number = int(input('Choose a whole number between 1 and 15,000'))
+            chosen_number = int(input('Choose a whole number between 1 and 15,000\n'))
             break
         except:
             print('Your answer must be an integer between 1 and 15,000. Try again!')
@@ -55,8 +60,12 @@ image_number = number()
 rice_choice = rice_options()
 file = find_files('{} ({}).jpg'.format(rice_choice, image_number), 'Rice_Image_Dataset')
 
+print(image_number)
+print(rice_choice)
+print(file)
+
 # Data Prep
-image_rgb = imread(file)
+image_rgb = imread(str(file))
 image_gray = color.rgb2gray(image_rgb)
 
 # Orientation Algorithm
