@@ -31,30 +31,43 @@ face = face_classifier.detectMultiScale(
     minSize = (40, 40)
 )
 
-faces = face_classifier.detectMultiScale(gray, 1.3, 4)
+print(face)
 
 # Create box around my face
-for (x, y, w, h) in faces:
+for (x, y, w, h) in face:
     cv2.rectangle(image,
                   (x, y),
                   (x + w, y + h),
                   (0, 255, 0),
                   10)
 
+# Create a circle around my face
+for (x, y, w, h) in face:
+   cv2.circle(
+      image,
+      (int(x + (w/2)), int(y + (h/2))),
+      int(w/2),
+      (0, 255, 0),
+      10
+   )
+
 # Detect eyes
 # Tutorial: https://www.tutorialspoint.com/how-to-detect-eyes-in-an-image-using-opencv-python
-# loop over the detected faces
+# Loop over detected face
 for (x,y,w,h) in face:
-   roi_gray = gray[y:y+h, x:x+w]
-   roi_color = image[y:y+h, x:x+w]
+   roi_gray = gray[y: y + h, x: x + w]
+   roi_color = image[y: y + h, x: x + w]
    
-   # detects eyes of within the detected face area (roi)
+   # Detect eyes
    eyes = eye_cascade.detectMultiScale(roi_gray)
    
-   # draw a rectangle around eyes
+   # Draw a rectangle around each eye
    for (ex,ey,ew,eh) in eyes:
-      cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,255),2)
-
+      cv2.rectangle(roi_color,
+                    (ex, ey),
+                    (ex + ew, ey + eh),
+                    (0,255,255),
+                    8)
 
 cv2.imshow('Identified Image', image)
 
