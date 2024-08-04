@@ -68,6 +68,17 @@ for (x, y, w, h) in face:
       8
    )
 
+# Put text on image
+# Tutorial: https://www.geeksforgeeks.org/python-opencv-cv2-puttext-method/
+image = cv2.putText(image,
+                    'This is Me',
+                    (200, 300),
+                    cv2.FONT_HERSHEY_COMPLEX,
+                    5,
+                    (52, 66, 227),
+                    10,
+                    cv2.LINE_AA) 
+
 cv2.imshow('This is Me', image)
 
 cv2.waitKey(0)
