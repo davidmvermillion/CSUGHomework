@@ -2,7 +2,6 @@
 import cv2
 from os import chdir
 from os.path import abspath, dirname, join
-import numpy as np
 
 # Force script execution directory to current path
 # https://stackoverflow.com/a/69556612/13801562
@@ -44,7 +43,7 @@ for (x, y, w, h) in face:
       10
    )
 
-# Detect eyes
+# Detecting eyes
 # Tutorial: https://www.tutorialspoint.com/how-to-detect-eyes-in-an-image-using-opencv-python
 # Loop over detected face
 for (x, y, w, h) in face:
@@ -54,15 +53,13 @@ for (x, y, w, h) in face:
    # Detect eyes
    eyes = eye_cascade.detectMultiScale(roi_gray)
    
-   # Create coordinates
+   # Create coordinates and parameters
    eye_x = min(eyes[:, 0])
    eye_y = min(eyes[:, 1])
    eye_h = max(eyes[:, 3])
    eye_w = max(eyes[:, 0]) + max(eyes[:, 2]) - min(eyes[:, 0])
 
    # Create rectangle around eyes
-
-
    cv2.rectangle(
       roi_color,
       (eye_x, eye_y),
@@ -70,15 +67,7 @@ for (x, y, w, h) in face:
       (0, 0, 255),
       8
    )
-   # Draw a rectangle around each eye
-   for (ex, ey, ew, eh) in eyes:
-      
-      cv2.rectangle(roi_color,
-                    (ex, ey),
-                    (ex + ew, ey + eh),
-                    (0, 0, 255),
-                    8)
 
-cv2.imshow('Identified Image', image)
+cv2.imshow('This is Me', image)
 
 cv2.waitKey(0)
