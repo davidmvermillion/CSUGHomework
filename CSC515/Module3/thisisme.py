@@ -31,17 +31,8 @@ face = face_classifier.detectMultiScale(
     minSize = (40, 40)
 )
 
-print(face)
-
-# Create box around my face
-for (x, y, w, h) in face:
-    cv2.rectangle(image,
-                  (x, y),
-                  (x + w, y + h),
-                  (0, 255, 0),
-                  10)
-
 # Create a circle around my face
+# https://stackoverflow.com/a/67939141/13801562
 for (x, y, w, h) in face:
    cv2.circle(
       image,
