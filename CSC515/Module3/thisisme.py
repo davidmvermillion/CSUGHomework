@@ -2,6 +2,7 @@
 import cv2
 from os import chdir
 from os.path import abspath, dirname, join
+import numpy as np
 
 # Force script execution directory to current path
 # https://stackoverflow.com/a/69556612/13801562
@@ -12,7 +13,7 @@ image = cv2.imread('DMV.png')
 
 # Tutorial for facial recognition: https://www.datacamp.com/tutorial/face-detection-python-opencv
 # Check image shape. Results: (2544, 3342, 3)
-print(image.shape)
+# print(image.shape)
 
 cv2.imshow('Original Image', image)
 
@@ -31,6 +32,7 @@ face = face_classifier.detectMultiScale(
     minSize = (40, 40)
 )
 
+print(face)
 # Create a circle around my face
 # https://stackoverflow.com/a/67939141/13801562
 for (x, y, w, h) in face:
@@ -45,19 +47,36 @@ for (x, y, w, h) in face:
 # Detect eyes
 # Tutorial: https://www.tutorialspoint.com/how-to-detect-eyes-in-an-image-using-opencv-python
 # Loop over detected face
-for (x,y,w,h) in face:
+for (x, y, w, h) in face:
    roi_gray = gray[y: y + h, x: x + w]
    roi_color = image[y: y + h, x: x + w]
    
    # Detect eyes
    eyes = eye_cascade.detectMultiScale(roi_gray)
    
+   # Create coordinates
+   eye_x = min(eyes[:, 0])
+   eye_y = min(eyes[:, 1])
+   eye_h = max(eyes[:, 3])
+   eye_w = max(eyes[:, 0]) + max(eyes[:, 2]) - min(eyes[:, 0])
+
+   # Create rectangle around eyes
+
+
+   cv2.rectangle(
+      roi_color,
+      (eye_x, eye_y),
+      (eye_x + eye_w, eye_y + eye_h),
+      (0, 0, 255),
+      8
+   )
    # Draw a rectangle around each eye
-   for (ex,ey,ew,eh) in eyes:
+   for (ex, ey, ew, eh) in eyes:
+      
       cv2.rectangle(roi_color,
                     (ex, ey),
                     (ex + ew, ey + eh),
-                    (0,255,255),
+                    (0, 0, 255),
                     8)
 
 cv2.imshow('Identified Image', image)
