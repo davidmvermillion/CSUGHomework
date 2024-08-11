@@ -47,32 +47,26 @@ lp3 = LapGaus(image, k3)
 lp5 = LapGaus(image, k5)
 lp7 = LapGaus(image, k7)
 
-# 3x3 subplots. rows are kernels, columns are methods. Add overall x and y axis labels
-# Continue by adding overall axis labels and title along with adding notes for each block of code
-
 # Display results
 fig, axs = plt.subplots(nrows = 3, ncols = 3)
+fig.suptitle('Smaller Kernel High-Pass Filters\nRetain More Detail', fontsize = 25).set_color('#171819')
+
+# Kernel size 3
 axs[0, 0].imshow(cv2.cvtColor(l3, cv2.COLOR_BGR2RGB))
-axs[0, 0].set_title('Laplacian\nk = 3')
 axs[0, 1].imshow(cv2.cvtColor(g3, cv2.COLOR_BGR2RGB))
-axs[0, 1].set_title('Gaussian\nk = 3')
 axs[0, 2].imshow(cv2.cvtColor(lp3, cv2.COLOR_BGR2RGB))
-axs[0, 2].set_title('Gaussian and Laplacian\nk = 3')
 
+# Kernel size 5
 axs[1, 0].imshow(cv2.cvtColor(l5, cv2.COLOR_BGR2RGB))
-axs[1, 0].set_title('Laplacian\nk = 5')
 axs[1, 1].imshow(cv2.cvtColor(g5, cv2.COLOR_BGR2RGB))
-axs[1, 1].set_title('Gaussian\nk = 5')
 axs[1, 2].imshow(cv2.cvtColor(lp5, cv2.COLOR_BGR2RGB))
-axs[1, 2].set_title('Gaussian and Laplacian\nk = 5')
 
+# Kernel size 7
 axs[2, 0].imshow(cv2.cvtColor(l7, cv2.COLOR_BGR2RGB))
-axs[2, 0].set_title('Laplacian\nk = 7')
 axs[2, 1].imshow(cv2.cvtColor(g7, cv2.COLOR_BGR2RGB))
-axs[2, 1].set_title('Gaussian\nk = 7')
 axs[2, 2].imshow(cv2.cvtColor(lp7, cv2.COLOR_BGR2RGB))
-axs[2, 2].set_title('Gaussian and Laplacian\nk = 7')
 
+# Turn off individual image axes
 axs[0, 0].axis('off')
 axs[0, 1].axis('off')
 axs[0, 2].axis('off')
@@ -83,5 +77,16 @@ axs[2, 0].axis('off')
 axs[2, 1].axis('off')
 axs[2, 2].axis('off')
 
+# Set global axes
+fig.supxlabel('Method', horizontalalignment = 'left', x = 0.19).set_color('#707070')
+fig.supylabel('Kernal Size', rotation = 'horizontal', verticalalignment = 'bottom', y = 0.1).set_color('#707070')
+fig.text(0.31, 0.07, 'Laplacian', ha = 'center', va = 'center').set_color('#606060')
+fig.text(0.58, 0.07, 'Gaussian', ha = 'center', va = 'center').set_color('#606060')
+fig.text(0.85, 0.07, 'Gaussian & Laplacian', ha = 'center', va = 'center').set_color('#606060')
+fig.text(0.17, 0.2, '7', ha = 'center', va = 'center').set_color('#606060')
+fig.text(0.17, 0.43, '5', ha = 'center', va = 'center').set_color('#606060')
+fig.text(0.17, 0.67, '3', ha = 'center', va = 'center').set_color('#606060')
+
+# Show results
 fig.tight_layout()
 plt.show()
