@@ -79,7 +79,7 @@ axs[2, 2].axis('off')
 
 # Set global axes
 fig.supxlabel('Method', horizontalalignment = 'left', x = 0.19).set_color('#707070')
-fig.supylabel('Kernal Size', rotation = 'horizontal', verticalalignment = 'bottom', y = 0.1).set_color('#707070')
+fig.supylabel('Kernel Size', rotation = 'horizontal', verticalalignment = 'bottom', y = 0.1).set_color('#707070')
 fig.text(0.31, 0.07, 'Laplacian', ha = 'center', va = 'center').set_color('#606060')
 fig.text(0.58, 0.07, 'Gaussian', ha = 'center', va = 'center').set_color('#606060')
 fig.text(0.85, 0.07, 'Gaussian & Laplacian', ha = 'center', va = 'center').set_color('#606060')
