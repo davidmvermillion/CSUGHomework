@@ -47,13 +47,14 @@ openingb = cv2.morphologyEx(binary_img2, cv2.MORPH_OPEN, kernel)
 # Close
 closingb = cv2.morphologyEx(binary_img2, cv2.MORPH_CLOSE, kernel)
 
+# Display differing effects of grayscale and binary sources for morphological transformations
 # Source: https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html
 images = [erosionb, dilationb, openingb, closingb,
           erosion, dilation, opening, closing]
 titles = ['Binary\nErosion', 'Binary\nDilation', 'Binary\nOpening', 'Binary\nClosing',
           'Grayscale\nErosion', 'Grayscale\nDilation', 'Grayscale\nOpening', 'Grayscale\nClosing']
 for i in range(8):
-    plt.subplot(2, 4, i+1), plt.imshow(images[i], 'gray')
+    plt.subplot(2, 4, i + 1), plt.imshow(images[i], 'gray')
     plt.xticks([]), plt.yticks([])
     plt.title(titles[i])
     plt.tight_layout()
@@ -61,7 +62,7 @@ plt.suptitle('Binary Morphology on Top\nGrayscale Morphology on Bottom', fontsiz
 plt.tight_layout()
 plt.show()
 
-# Display results
+# Display overall results for comparison
 fig, axs = plt.subplots(nrows = 3, ncols = 3)
 fig.suptitle('Latent Fingerprint Morpholigical\nOperations had Varying Effects', fontsize = 25).set_color('#171819')
 
