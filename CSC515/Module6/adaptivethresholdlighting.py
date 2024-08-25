@@ -1,7 +1,6 @@
 # Import packages
 import cv2
 from os import chdir
-import numpy as np
 from os.path import abspath, dirname
 import matplotlib.pyplot as plt
 
