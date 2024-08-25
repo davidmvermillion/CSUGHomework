@@ -16,12 +16,12 @@ image_ltod = cv2.cvtColor(image_ltod, cv2.COLOR_BGR2GRAY)
 
 # Settings
 # Dark to Light Adaptive Thresholding
-dtolth1 = cv2.adaptiveThreshold(image_dtol, 10, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 1111, 2)
-dtolth2 = cv2.adaptiveThreshold(image_dtol, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 1111, 2)
+dtolth1 = cv2.adaptiveThreshold(image_dtol, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 633, -30)
+dtolth2 = cv2.adaptiveThreshold(image_dtol, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 1133, -35)
 
 # Light to Dark Adaptive Thresholding
-ltodth1 = cv2.adaptiveThreshold(image_ltod, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
-ltodth2 = cv2.adaptiveThreshold(image_ltod, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+ltodth1 = cv2.adaptiveThreshold(image_ltod, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 633, -30)
+ltodth2 = cv2.adaptiveThreshold(image_ltod, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 1133, -30)
 
 titles = ['Dark to Light\nGrayscale', 'Light to Dark\nGrayscale',
           'Dark to Light\nMean', 'Dark to Light\nGaussian',
