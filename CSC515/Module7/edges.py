@@ -12,10 +12,17 @@ chdir(dirname(abspath(__file__)))
 # https://medium.com/jungletronics/opencv-image-basics-2e63d973851a
 background = np.ones(shape = (300, 500, 3))
 cv2.rectangle(background, pt1 = (50, 50), pt2 = (150, 150), color = (0, 0, 227), thickness = cv2.FILLED)
-cv2.circle(background, center = (350, 200), radius = 50, color = (0, 128, 0), thickness = cv2.FILLED)
+circle = cv2.circle(background, center = (350, 200), radius = 50, color = (0, 128, 0), thickness = cv2.FILLED)
+# https://stackoverflow.com/a/56186046/13801562
+circle = (circle * 255).astype(np.uint8)
 
-# plt.imshow(square)
+# Edge Detection
+canny = cv2.Canny(circle, 10, 25)
+
+
+
 cv2.imshow('Original Image', background)
+cv2.imshow('Canny', canny)
 cv2.waitKey(0)
 
 # titles = ['Dark to Light\nGrayscale', 'Light to Dark\nGrayscale',
