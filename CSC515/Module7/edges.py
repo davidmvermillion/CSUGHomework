@@ -17,12 +17,18 @@ circle = cv2.circle(background, center = (350, 200), radius = 50, color = (0, 12
 circle = (circle * 255).astype(np.uint8)
 
 # Edge Detection
+# https://docs.opencv.org/4.x/da/d22/tutorial_py_canny.html?ref=blog.roboflow.com
 canny = cv2.Canny(circle, 10, 25)
+# https://docs.opencv.org/4.x/d5/d0f/tutorial_py_gradients.html
+sobel = cv2.Sobel(circle, ddepth = cv2.CV_8U, dx = 1, dy = 0, ksize = 7)
+laplacian = cv2.Laplacian(circle, cv2.CV_8U)
+
+# Measure of performance is amount of outline
 
 
-
-cv2.imshow('Original Image', background)
-cv2.imshow('Canny', canny)
+# cv2.imshow('Original Image', background)
+# cv2.imshow('Canny', canny)
+cv2.imshow('Laplacian', laplacian)
 cv2.waitKey(0)
 
 # titles = ['Dark to Light\nGrayscale', 'Light to Dark\nGrayscale',
