@@ -20,7 +20,7 @@ circle = (circle * 255).astype(np.uint8)
 # https://docs.opencv.org/4.x/da/d22/tutorial_py_canny.html?ref=blog.roboflow.com
 canny = cv2.Canny(circle, 10, 25)
 # https://docs.opencv.org/4.x/d5/d0f/tutorial_py_gradients.html
-sobel = cv2.Sobel(circle, ddepth = cv2.CV_8U, dx = 1, dy = 0, ksize = 7)
+sobel = cv2.Sobel(circle, ddepth = cv2.CV_8U, dx = 1, dy = 1, ksize = 7)
 laplacian = cv2.Laplacian(circle, cv2.CV_8U)
 
 # Measure of performance is amount of outline
