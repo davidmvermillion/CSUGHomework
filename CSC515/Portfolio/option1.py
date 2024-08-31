@@ -13,11 +13,11 @@ image1 = cv2.imread('Images/Image2.jpg') # RUS License Plate w/ Shadow
 image2 = cv2.imread('Images/Image3.jpg') # Clear RUS License Plate Lighting
 image3 = cv2.imread('Images/Image5.jpg') # Two European Plates w/ Flat Lighting
 source = [image1, image2, image3]
-gray = []
+gray = [0, 1, 2]
 
 
 # Convert to Grayscale
-for i in source: # Verify images are called correctly
+for i in range(len(source)): # Verify images are called correctly
     gray[i] = cv2.cvtColor(source[i], cv2.COLOR_BGR2GRAY) # Verify it works without gray being pre-declared
 
 # # Load Classifier
@@ -68,11 +68,14 @@ for i in source: # Verify images are called correctly
 # images = [background, canny, sobel, laplaciann,
 #           noisyversion, cannyn, sobeln, laplaciann]
 
-# for i in range(8):
-#     plt.subplot(2, 4, i + 1), plt.imshow(images[i], 'gray')
-#     plt.xticks([]), plt.yticks([])
-#     plt.title(titles[i])
-#     plt.tight_layout()
+# Convert BGR to RGB
+# cv2.cvtColor(source, cv2.COLOR_BGR2RGB)
+
+for i in range(3):
+    plt.subplot(3, 1, i + 1), plt.imshow(gray[i], 'gray')
+    plt.xticks([]), plt.yticks([])
+    # plt.title(titles[i])
+    plt.tight_layout()
 # plt.suptitle('Edge Detection Results', fontsize = 25).set_color('#171819')
-# plt.tight_layout()
-# plt.show()
+plt.tight_layout()
+plt.show()
