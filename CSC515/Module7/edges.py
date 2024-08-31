@@ -38,11 +38,6 @@ cannyn = cv2.Canny(noisyversion, 110, 400)
 sobeln = cv2.Sobel(noisyversion, ddepth = cv2.CV_8U, dx = 1, dy = 0, ksize = 7)
 laplaciann = cv2.Laplacian(circle, cv2.CV_8U)
 
-# cv2.imshow('Original Image', background)
-# cv2.imshow('Canny', canny)
-# cv2.imshow('Laplacian', cannyn)
-# cv2.waitKey(0)
-
 titles = ['Original', 'Canny', 'Sobel', 'Laplacian',
           'Gaussian Noise', 'Canny Noise', 'Sobel Noise', 'Laplacian Noise']
 
