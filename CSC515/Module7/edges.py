@@ -43,17 +43,17 @@ laplaciann = cv2.Laplacian(circle, cv2.CV_8U)
 # cv2.imshow('Laplacian', cannyn)
 # cv2.waitKey(0)
 
-# titles = ['Dark to Light\nGrayscale', 'Light to Dark\nGrayscale',
-#           'Dark to Light\nMean', 'Dark to Light\nGaussian',
-#           'Light to Dark\nMean', 'Light to Dark\nGaussian']
+titles = ['Original', 'Canny', 'Sobel', 'Laplacian',
+          'Gaussian Noise', 'Canny Noise', 'Sobel Noise', 'Laplacian Noise']
 
-# images = [image_dtol, image_ltod, dtolth1, dtolth2, ltodth1, ltodth2]
+images = [background, canny, sobel, laplaciann,
+          noisyversion, cannyn, sobeln, laplaciann]
 
-# for i in range(6):
-#     plt.subplot(3, 2, i + 1), plt.imshow(images[i], 'gray')
-#     plt.xticks([]), plt.yticks([])
-#     plt.title(titles[i])
-#     plt.tight_layout()
-# plt.suptitle('Adaptive Thresholding for Opposite Lighting', fontsize = 20).set_color('#171819')
-# plt.tight_layout()
-# plt.show()
+for i in range(8):
+    plt.subplot(2, 4, i + 1), plt.imshow(images[i], 'gray')
+    plt.xticks([]), plt.yticks([])
+    plt.title(titles[i])
+    plt.tight_layout()
+plt.suptitle('Edge Detection Results', fontsize = 25).set_color('#171819')
+plt.tight_layout()
+plt.show()
