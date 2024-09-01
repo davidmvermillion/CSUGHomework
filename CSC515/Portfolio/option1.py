@@ -32,7 +32,8 @@ rusPlateFinder = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_russ
 # Detect Plates
 # https://github.com/kennethleungty/Car-Plate-Detection-OpenCV-TesseractOCR/blob/main/Car%20Plate%20Detection%20with%20OpenCV%20and%20TesseractOCR.ipynb
 def CarplateDetect(image):
-    carplate_overlay = image.copy() # Create overlay to display red rectangle of detected car plate
+    # Color rectangle overlay on grayscale image plate detection area
+    carplate_overlay = cv2.cvtColor(image.copy(), cv2.COLOR_GRAY2BGR)
     carplate_rects = rusPlateFinder.detectMultiScale(carplate_overlay,
                                                      scaleFactor = 1.1,
                                                      minNeighbors = 5) 
@@ -41,13 +42,13 @@ def CarplateDetect(image):
         cv2.rectangle(carplate_overlay,
                       (x, y),
                       (x + w, y + h),
-                      (0, 0, 255),
+                      (255, 0, 0),
                       25) 
         
     return carplate_overlay
 
 for i in range(len(source)):
-    plates[i] = CarplateDetect(source[i])
+    plates[i] = CarplateDetect(gray[i])
 
 
 # # Implement processing if required to make plates horizontal
@@ -62,8 +63,8 @@ for i in range(len(source)):
 #           noisyversion, cannyn, sobeln, laplaciann]
 
 # Convert BGR to RGB
-for i in range(len(plates)):
-    plates[i] = cv2.cvtColor(plates[i], cv2.COLOR_BGR2RGB)
+# for i in range(len(plates)):
+#     plates[i] = cv2.cvtColor(plates[i], cv2.COLOR_BGR2RGB)
 
 for i in range(3):
     plt.subplot(3, 1, i + 1), plt.imshow(plates[i], 'gray')
