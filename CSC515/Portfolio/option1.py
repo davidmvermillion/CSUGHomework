@@ -9,9 +9,9 @@ import numpy as np
 chdir(dirname(abspath(__file__)))
 
 # Read images
-image1 = cv2.imread('Images/Image6.jpg') # Russian Taxi at Angle
-image2 = cv2.imread('Images/Image3.jpg') # Clear RUS License Plate Lighting
-image3 = cv2.imread('Images/Image5.jpg') # Two European Plates w/ Flat Lighting
+image1 = cv2.imread('Images/Image6.jpg') # Russian Taxi at Angle and Some Distance
+image2 = cv2.imread('Images/Image7.jpg') # Two Russian Plates with Telephoto Lens
+image3 = cv2.imread('Images/Image4.jpg') # Ontario Plate
 source = list([image1, image2, image3])
 # https://www.geeksforgeeks.org/how-to-fix-valueerror-setting-an-array-element-with-a-sequence/
 source = np.array(source, dtype = list)
