@@ -19,7 +19,7 @@ source = np.array(source, dtype = list)
 # Define placeholders
 gray = np.array([0, 1, 2], dtype = list)
 plates = np.array(list(range(3)), dtype = list)
-# plates2 = np.array(list(range(3)), dtype = list)
+plateszoom = np.array(list(range(3)), dtype = list)
 
 # Convert to Grayscale
 for i in range(len(source)):
@@ -37,18 +37,53 @@ def CarplateDetect(image):
     carplate_rects = rusPlateFinder.detectMultiScale(carplate_overlay,
                                                      scaleFactor = 1.1,
                                                      minNeighbors = 5) 
+    # carplate_img = 0
 
-    for x, y, w, h in carplate_rects: 
+    for x, y, w, h in carplate_rects:
         cv2.rectangle(carplate_overlay,
                       (x, y),
                       (x + w, y + h),
                       (255, 0, 0),
                       25) 
         
+    # for x, y, w, h in carplate_rects:
+    #     carplate_img = carplate_overlay[y + 15: y + h - 10,
+    #                          x + 15: x + w - 20] 
+
+
     return carplate_overlay
+
+# def PlateZoom(image):
+#     carplate_overlay = cv2.cvtColor(image.copy(), cv2.COLOR_GRAY2BGR)
+#     carplate_rects = rusPlateFinder.detectMultiScale(carplate_overlay,
+#                                                      scaleFactor = 1.1,
+#                                                      minNeighbors = 5)
+#     for x, y, w, h in carplate_rects:
+#         carplate_img = carplate_overlay[y + 15: y + h - 10,
+#                              x + 15: x + w - 20]
+#     return carplate_img
+
+def carplate_extract(image):
+    
+    carplate_rects = rusPlateFinder.detectMultiScale(image,scaleFactor=1.1, minNeighbors=5) 
+
+    plates_x = min(carplate_rects[:, 0])
+    plates_y = min(carplate_rects[:, 1])
+    plates_h = max(carplate_rects[:, 3])
+    plates_w = max(carplate_rects[:, 0]) + max(carplate_rects[:, 2]) - min(carplate_rects[:, 0])
+    carplate_img = image[plates_y : plates_y + plates_h, plates_x : plates_x + plates_w]
+
+    # for x,y,w,h in carplate_rects: 
+
+        
+    #     carplate_img = image[y+15:y+h-10,x+15:x+w-20] 
+        
+    #     return carplate_img
+    return carplate_img
 
 for i in range(len(source)):
     plates[i] = CarplateDetect(gray[i])
+    plateszoom[i] = carplate_extract(gray[i])
 
 
 # # Implement processing if required to make plates horizontal
@@ -59,15 +94,15 @@ for i in range(len(source)):
 # titles = ['Original', 'Canny', 'Sobel', 'Laplacian',
 #           'Gaussian Noise', 'Canny Noise', 'Sobel Noise', 'Laplacian Noise']
 
-# images = [background, canny, sobel, laplaciann,
-#           noisyversion, cannyn, sobeln, laplaciann]
+images = [plates[0], plates[1], plates[2],
+          plateszoom[0], plateszoom[1], plateszoom[2]]
 
 # Convert BGR to RGB
 # for i in range(len(plates)):
 #     plates[i] = cv2.cvtColor(plates[i], cv2.COLOR_BGR2RGB)
 
 for i in range(3):
-    plt.subplot(3, 1, i + 1), plt.imshow(plates[i], 'gray')
+    plt.subplot(3, 2, i + 1), plt.imshow(plates[i], 'gray')
     plt.xticks([]), plt.yticks([])
     # plt.title(titles[i])
     plt.tight_layout()
