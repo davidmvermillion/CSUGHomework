@@ -12,11 +12,16 @@ chdir(dirname(abspath(__file__)))
 image1 = cv2.imread('Images/Image2.jpg') # RUS License Plate w/ Shadow
 image2 = cv2.imread('Images/Image3.jpg') # Clear RUS License Plate Lighting
 image3 = cv2.imread('Images/Image5.jpg') # Two European Plates w/ Flat Lighting
-source = [image1, image2, image3]
+source = list([image1, image2, image3])
+# https://www.geeksforgeeks.org/how-to-fix-valueerror-setting-an-array-element-with-a-sequence/
+source = np.array(source, dtype = list)
 
 # Define placeholders
-gray = [0, 1, 2]
-plates = list(range(3))
+gray = np.array([0, 1, 2], dtype = list)
+plates = np.array(list(range(3)), dtype = list)
+
+print(type(gray))
+print(type(plates))
 
 # Convert to Grayscale
 for i in range(len(source)):
@@ -73,11 +78,11 @@ rusPlateReader = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_russ
 # Convert BGR to RGB
 # cv2.cvtColor(source, cv2.COLOR_BGR2RGB)
 
-# for i in range(3):
-#     plt.subplot(3, 1, i + 1), plt.imshow(gray[i], 'gray')
-#     plt.xticks([]), plt.yticks([])
-#     # plt.title(titles[i])
-#     plt.tight_layout()
-# # plt.suptitle('Edge Detection Results', fontsize = 25).set_color('#171819')
-# plt.tight_layout()
-# plt.show()
+for i in range(3):
+    plt.subplot(3, 1, i + 1), plt.imshow(gray[i], 'gray')
+    plt.xticks([]), plt.yticks([])
+    # plt.title(titles[i])
+    plt.tight_layout()
+# plt.suptitle('Edge Detection Results', fontsize = 25).set_color('#171819')
+plt.tight_layout()
+plt.show()
