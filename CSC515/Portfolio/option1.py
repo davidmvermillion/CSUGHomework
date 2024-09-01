@@ -35,7 +35,7 @@ def CarplateDetect(image):
     carplate_overlay = image.copy() # Create overlay to display red rectangle of detected car plate
     carplate_rects = rusPlateFinder.detectMultiScale(carplate_overlay,
                                                      scaleFactor = 1.1,
-                                                     minNeighbors = 5) 
+                                                     minNeighbors = 6) 
 
     for x, y, w, h in carplate_rects: 
         cv2.rectangle(carplate_overlay,
