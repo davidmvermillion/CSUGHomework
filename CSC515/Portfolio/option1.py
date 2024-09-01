@@ -9,7 +9,9 @@ import numpy as np
 chdir(dirname(abspath(__file__)))
 
 # Read images
-image1 = cv2.imread('Images/Image2.jpg') # RUS License Plate w/ Shadow
+# image1 = cv2.imread('Images/Image2.jpg') # RUS License Plate w/ Shadow
+# image1 = cv2.imread('Images/Image1.jpg') # Hungarian USSR Plate
+image1 = cv2.imread('Images/Image6.jpg') # Russian Taxi at Angle
 image2 = cv2.imread('Images/Image3.jpg') # Clear RUS License Plate Lighting
 image3 = cv2.imread('Images/Image5.jpg') # Two European Plates w/ Flat Lighting
 source = list([image1, image2, image3])
@@ -19,6 +21,7 @@ source = np.array(source, dtype = list)
 # Define placeholders
 gray = np.array([0, 1, 2], dtype = list)
 plates = np.array(list(range(3)), dtype = list)
+plates2 = np.array(list(range(3)), dtype = list)
 
 # Convert to Grayscale
 for i in range(len(source)):
@@ -36,6 +39,20 @@ for i in range(len(gray)):
         minNeighbors = 5,
         minSize = (40, 40)
     )
+
+# https://github.com/kennethleungty/Car-Plate-Detection-OpenCV-TesseractOCR/blob/main/Car%20Plate%20Detection%20with%20OpenCV%20and%20TesseractOCR.ipynb
+def carplate_detect(image):
+    carplate_overlay = image.copy() # Create overlay to display red rectangle of detected car plate
+    carplate_rects = rusPlateFinder.detectMultiScale(carplate_overlay,scaleFactor=1.1, minNeighbors=5) 
+
+    for x,y,w,h in carplate_rects: 
+        cv2.rectangle(carplate_overlay, (x,y), (x+w,y+h), (255,0,0), 5) 
+        
+    return carplate_overlay
+
+for i in range(len(gray)):
+    plates2[i] = carplate_detect(gray[i])
+
 
 # # Implement processing if required to make plates horizontal
 
@@ -74,11 +91,11 @@ for i in range(len(gray)):
 # Convert BGR to RGB
 # cv2.cvtColor(source, cv2.COLOR_BGR2RGB)
 
-# for i in range(3):
-#     plt.subplot(3, 1, i + 1), plt.imshow(plates[i], 'gray')
-#     plt.xticks([]), plt.yticks([])
-#     # plt.title(titles[i])
-#     plt.tight_layout()
-# # plt.suptitle('Edge Detection Results', fontsize = 25).set_color('#171819')
-# plt.tight_layout()
-# plt.show()
+for i in range(3):
+    plt.subplot(3, 1, i + 1), plt.imshow(plates2[i], 'gray')
+    plt.xticks([]), plt.yticks([])
+    # plt.title(titles[i])
+    plt.tight_layout()
+# plt.suptitle('Edge Detection Results', fontsize = 25).set_color('#171819')
+plt.tight_layout()
+plt.show()
