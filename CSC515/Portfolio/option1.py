@@ -30,7 +30,7 @@ rusPlateReader = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_russ
 
 # Detect Plates
 for i in range(len(gray)):
-    plates[i] = rusPlateFinder16.detectMultiScale(
+    plates[i] = rusPlateReader.detectMultiScale(
         gray[i],
         scaleFactor = 1.1,
         minNeighbors = 5,
@@ -39,7 +39,7 @@ for i in range(len(gray)):
 
 # # Implement processing if required to make plates horizontal
 
-# # Boundary Boxes around Detected Plates
+# Boundary Boxes around Detected Plates
 
 # for (x, y, w, h) in plates:
 #    roi_gray = gray[y: y + h, x: x + w]
@@ -74,11 +74,11 @@ for i in range(len(gray)):
 # Convert BGR to RGB
 # cv2.cvtColor(source, cv2.COLOR_BGR2RGB)
 
-# for i in range(3):
-#     plt.subplot(3, 1, i + 1), plt.imshow(gray[i], 'gray')
-#     plt.xticks([]), plt.yticks([])
-#     # plt.title(titles[i])
-#     plt.tight_layout()
-# # plt.suptitle('Edge Detection Results', fontsize = 25).set_color('#171819')
-# plt.tight_layout()
-# plt.show()
+for i in range(3):
+    plt.subplot(3, 1, i + 1), plt.imshow(plates[i], 'gray')
+    plt.xticks([]), plt.yticks([])
+    # plt.title(titles[i])
+    plt.tight_layout()
+# plt.suptitle('Edge Detection Results', fontsize = 25).set_color('#171819')
+plt.tight_layout()
+plt.show()
