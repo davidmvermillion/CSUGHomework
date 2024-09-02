@@ -1,9 +1,10 @@
 # Import packages
-import cv2
+import cv2;
 from os import chdir
 from os.path import abspath, dirname
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 # Force script execution directory to current path
 chdir(dirname(abspath(__file__)))
@@ -66,11 +67,12 @@ def CarplateDetect(image):
 def carplate_extract(image):
     
     carplate_rects = rusPlateFinder.detectMultiScale(image,scaleFactor=1.1, minNeighbors=5) 
+    carplate_rects_df = pd.DataFrame(carplate_rects)
 
-    plates_x = min(carplate_rects[:, 0])
-    plates_y = min(carplate_rects[:, 1])
-    plates_h = max(carplate_rects[:, 3])
-    plates_w = max(carplate_rects[:, 0]) + max(carplate_rects[:, 2]) - min(carplate_rects[:, 0])
+    plates_x = np.min(carplate_rects_df[0])
+    plates_y = min(carplate_rects_df[1])
+    plates_h = min(carplate_rects_df[3])
+    plates_w = min(carplate_rects_df[2])
     carplate_img = image[plates_y : plates_y + plates_h, plates_x : plates_x + plates_w]
 
     # for x,y,w,h in carplate_rects: 
@@ -81,9 +83,12 @@ def carplate_extract(image):
     #     return carplate_img
     return carplate_img
 
-for i in range(len(source)):
-    plates[i] = CarplateDetect(gray[i])
-    plateszoom[i] = carplate_extract(gray[i])
+# # Come back to this idea later
+# for i in range(len(source)):
+#     plates[i] = CarplateDetect(gray[i])
+#     plateszoom[i] = carplate_extract(gray[i])
+
+
 
 
 # # Implement processing if required to make plates horizontal
