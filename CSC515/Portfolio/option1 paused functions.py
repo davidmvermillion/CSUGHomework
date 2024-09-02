@@ -88,8 +88,6 @@ def carplate_extract(image):
 #     plates[i] = CarplateDetect(gray[i])
 #     plateszoom[i] = carplate_extract(gray[i])
 
-plates[0] = CarplateDetect(gray[0])
-plateszoom[0] = carplate_extract(gray[0])
 
 
 
