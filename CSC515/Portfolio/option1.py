@@ -86,8 +86,47 @@ plateszoom_2 = SemiZoom(carplate_rects_1, carplate_overlay)
 # Non-Russian plate not identified and therefore not extracted
 plates_2 = CarplateDetect(gray[2])
 
+# Rotation Processing
+# https://medium.com/@maritaganta/how-to-properly-rotate-an-image-with-opencv-475e44a252f6
+# Functions
+def calculate_slope(point1, point2):
+    # Calculate the slope between two points
+    delta_y = point2[1] - point1[1]
+    delta_x = point2[0] - point1[0]
+    
+    # Avoid division by zero
+    if delta_x != 0:
+        slope = delta_y / delta_x
+    else:
+        slope = np.inf
+    
+    return slope
 
+def calculate_rotation_angle(point1, point2):
+    # Calculate the angle between the line connecting the two points and the horizontal axis
+    delta_y = point2[1] - point1[1]
+    delta_x = point2[0] - point1[0]
+    
+    # Calculate the angle using arctan
+    angle = np.arctan(delta_y, delta_x)
+    
+    return angle
 
+def rotate_image(image, angle, center):
+    # Get the rotation matrix
+    rotation_matrix = cv2.getRotationMatrix2D(center, angle, 1.0)
+    
+    # Perform the rotation
+    rotated_image = cv2.warpAffine(image, rotation_matrix, (image.shape[1], image.shape[0]))
+    
+    return rotated_image
+
+# Rotate First Plate
+slope = calculate_slope((31, 156), (443, 198))
+angle = np.arctan(slope)
+angle = np.degrees(angle)
+center = (plateszoom_0.shape[1] // 2, plateszoom_0.shape[0] // 2)
+rotated_image_0 = rotate_image(plateszoom_0, angle, center)
 
 # # Implement processing if required to make plates horizontal
 
