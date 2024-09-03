@@ -61,8 +61,26 @@ def PlateZoom(image):
         exit
     return carplate_img
 
+def SemiZoom(image, overlay):
+    image = overlay[image[1]:image[1]+image[3],
+                    image[0]:image[0]+image[2]]
+    return image
+
+# First Image Extracted
 plates[0] = CarplateDetect(gray[0])
-plateszoom[0] = PlateZoom(gray[0])
+plateszoom_0 = PlateZoom(gray[0])
+
+# Second Image Extracted
+carplate_rects = rusPlateFinder.detectMultiScale(gray[1],
+                                                     scaleFactor = 1.1,
+                                                     minNeighbors = 5)
+carplate_overlay = cv2.cvtColor(gray[1].copy(), cv2.COLOR_GRAY2BGR)
+carplate_rects_0 = carplate_rects[0]
+carplate_rects_1 = carplate_rects[1]
+plates[1] = CarplateDetect(gray[1])
+plateszoom_1 = SemiZoom(carplate_rects_0, carplate_overlay)
+plateszoom_2 = SemiZoom(carplate_rects_1, carplate_overlay)
+
 
 
 
