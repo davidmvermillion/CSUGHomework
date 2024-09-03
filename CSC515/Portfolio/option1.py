@@ -67,19 +67,24 @@ def SemiZoom(image, overlay):
     return image
 
 # First Image Extracted
-plates[0] = CarplateDetect(gray[0])
+plates_0 = CarplateDetect(gray[0])
 plateszoom_0 = PlateZoom(gray[0])
 
 # Second Image Extracted
+# Lots of room to improve code here
 carplate_rects = rusPlateFinder.detectMultiScale(gray[1],
                                                      scaleFactor = 1.1,
                                                      minNeighbors = 5)
 carplate_overlay = cv2.cvtColor(gray[1].copy(), cv2.COLOR_GRAY2BGR)
 carplate_rects_0 = carplate_rects[0]
 carplate_rects_1 = carplate_rects[1]
-plates[1] = CarplateDetect(gray[1])
+plates_1 = CarplateDetect(gray[1])
 plateszoom_1 = SemiZoom(carplate_rects_0, carplate_overlay)
 plateszoom_2 = SemiZoom(carplate_rects_1, carplate_overlay)
+
+# Third Image
+# Non-Russian plate not identified and therefore not extracted
+plates_2 = CarplateDetect(gray[2])
 
 
 
@@ -92,15 +97,15 @@ plateszoom_2 = SemiZoom(carplate_rects_1, carplate_overlay)
 # titles = ['Original', 'Canny', 'Sobel', 'Laplacian',
 #           'Gaussian Noise', 'Canny Noise', 'Sobel Noise', 'Laplacian Noise']
 
-images = [plates[0], plates[1], plates[2],
-          plateszoom[0], plateszoom[1], plateszoom[2]]
+images = [plates_0, plates_1, plates_2,
+          plateszoom_0, plateszoom_1, plateszoom_2]
 
 # Convert BGR to RGB
 # for i in range(len(plates)):
 #     plates[i] = cv2.cvtColor(plates[i], cv2.COLOR_BGR2RGB)
 
-for i in range(3):
-    plt.subplot(3, 2, i + 1), plt.imshow(plates[i], 'gray')
+for i in range(6):
+    plt.subplot(3, 2, i + 1), plt.imshow(images[i], 'gray')
     plt.xticks([]), plt.yticks([])
     # plt.title(titles[i])
     plt.tight_layout()
