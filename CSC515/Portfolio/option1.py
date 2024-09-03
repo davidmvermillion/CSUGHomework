@@ -38,7 +38,6 @@ def CarplateDetect(image):
     carplate_rects = rusPlateFinder.detectMultiScale(carplate_overlay,
                                                      scaleFactor = 1.1,
                                                      minNeighbors = 5) 
-    # carplate_img = 0
 
     for x, y, w, h in carplate_rects:
         cv2.rectangle(carplate_overlay,
@@ -46,50 +45,24 @@ def CarplateDetect(image):
                       (x + w, y + h),
                       (255, 0, 0),
                       25) 
-        
-    # for x, y, w, h in carplate_rects:
-    #     carplate_img = carplate_overlay[y + 15: y + h - 10,
-    #                          x + 15: x + w - 20] 
-
 
     return carplate_overlay
 
-# def PlateZoom(image):
-#     carplate_overlay = cv2.cvtColor(image.copy(), cv2.COLOR_GRAY2BGR)
-#     carplate_rects = rusPlateFinder.detectMultiScale(carplate_overlay,
-#                                                      scaleFactor = 1.1,
-#                                                      minNeighbors = 5)
-#     for x, y, w, h in carplate_rects:
-#         carplate_img = carplate_overlay[y + 15: y + h - 10,
-#                              x + 15: x + w - 20]
-#     return carplate_img
-
-def carplate_extract(image):
-    
-    carplate_rects = rusPlateFinder.detectMultiScale(image,scaleFactor=1.1, minNeighbors=5) 
-    carplate_rects_df = pd.DataFrame(carplate_rects)
-
-    plates_x = np.min(carplate_rects_df[0])
-    plates_y = min(carplate_rects_df[1])
-    plates_h = min(carplate_rects_df[3])
-    plates_w = min(carplate_rects_df[2])
-    carplate_img = image[plates_y : plates_y + plates_h, plates_x : plates_x + plates_w]
-
-    # for x,y,w,h in carplate_rects: 
-
-        
-    #     carplate_img = image[y+15:y+h-10,x+15:x+w-20] 
-        
-    #     return carplate_img
+def PlateZoom(image):
+    carplate_overlay = cv2.cvtColor(image.copy(), cv2.COLOR_GRAY2BGR)
+    carplate_rects = rusPlateFinder.detectMultiScale(carplate_overlay,
+                                                     scaleFactor = 1.1,
+                                                     minNeighbors = 5)
+    if len(carplate_rects) < 2:
+        for x, y, w, h in carplate_rects:
+            carplate_img = carplate_overlay[y + 15: y + h - 10,
+                                x + 15: x + w - 20]
+    else:
+        exit
     return carplate_img
 
-# # Come back to this idea later
-# for i in range(len(source)):
-#     plates[i] = CarplateDetect(gray[i])
-#     plateszoom[i] = carplate_extract(gray[i])
-
 plates[0] = CarplateDetect(gray[0])
-plateszoom[0] = carplate_extract(gray[0])
+plateszoom[0] = PlateZoom(gray[0])
 
 
 
