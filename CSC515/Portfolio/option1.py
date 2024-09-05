@@ -83,8 +83,12 @@ plateszoom_1 = SemiZoom(carplate_rects_0, carplate_overlay)
 plateszoom_2 = SemiZoom(carplate_rects_1, carplate_overlay)
 
 # Third Image
-# Non-Russian plate not identified and therefore not extracted
+# Non-Russian plate (Canadian) not identified by algorithm and therefore not extracted
 plates_2 = CarplateDetect(gray[2])
+
+# Read Plates in Extracted Images
+# https://medium.com/@draj0718/text-recognition-and-extraction-in-images-93d71a337fc8
+
 
 # Rotation Processing
 # https://medium.com/@maritaganta/how-to-properly-rotate-an-image-with-opencv-475e44a252f6
@@ -129,7 +133,6 @@ def RotationProcess(image, point1, point2):
     rotated_image = rotate_image(image, angle, center)
     return rotated_image
 
-
 # Rotate Plates
 # Points come from examining original zoomed images for points near bottom corners of plates to align bottom horizontal axes
 rotated_plate_0 = RotationProcess(plateszoom_0, (30, 156), (441, 195))
@@ -144,7 +147,7 @@ rotated_plate_2 = RotationProcess(plateszoom_2, (10, 75), (234, 72))
 #           'Gaussian Noise', 'Canny Noise', 'Sobel Noise', 'Laplacian Noise']
 
 images = [plates_0, plates_1, plates_2,
-          rotated_plate_0, rotated_plate_1, rotated_plate_1]
+          rotated_plate_0, rotated_plate_1, rotated_plate_2]
 
 # Convert BGR to RGB
 # for i in range(len(plates)):
