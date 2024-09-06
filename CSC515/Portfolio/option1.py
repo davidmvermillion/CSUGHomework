@@ -5,6 +5,7 @@ from os.path import abspath, dirname
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import easyocr as eor
 
 # Force script execution directory to current path
 chdir(dirname(abspath(__file__)))
@@ -139,7 +140,26 @@ rotated_plate_0 = RotationProcess(plateszoom_0, (30, 156), (441, 195))
 rotated_plate_1 = RotationProcess(plateszoom_1, (10.2, 74.3), (234.7, 71.2))
 rotated_plate_2 = RotationProcess(plateszoom_2, (10, 75), (234, 72))
 
+# Additional Processing steps
+# Function from Module 4 assignment
+def Gaussian(item, kernel):
+    blur = cv2.GaussianBlur(item, (kernel, kernel), 10)
+    return blur
 
+# EasyOCR hint from: https://medium.com/@draj0718/text-recognition-and-extraction-in-images-93d71a337fc8
+reader = eor.Reader(['ru'])
+
+# First plate needs blurring to read correctly
+rotated_plate_0_g = Gaussian(rotated_plate_0, 5)
+result_0 = reader.readtext(rotated_plate_0_g, paragraph = 'False')
+result_frame_0 = pd.DataFrame(result_0)
+
+# Second plate reads fine without additional processing. Gaussian added to remove slash.
+rotated_plate_1_g = Gaussian(rotated_plate_1, 5)
+result_1 = reader.readtext(rotated_plate_1, paragraph = 'False')
+result_frame_1 = pd.DataFrame(result_1)
+
+# Third plate requires ____
 
 # Figure out how to display results once confirmed that they work
 
