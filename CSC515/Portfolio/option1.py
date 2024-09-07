@@ -3,9 +3,9 @@ import cv2;
 from os import chdir
 from os.path import abspath, dirname
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
+from pandas import DataFrame
 import easyocr as eor
+from numpy import array, inf, arctan, degrees
 
 # Force script execution directory to current path
 chdir(dirname(abspath(__file__)))
@@ -16,12 +16,12 @@ image2 = cv2.imread('Images/Image7.jpg') # Two Russian Plates with Telephoto Len
 image3 = cv2.imread('Images/Image4.jpg') # Ontario Plate
 source = list([image1, image2, image3])
 # https://www.geeksforgeeks.org/how-to-fix-valueerror-setting-an-array-element-with-a-sequence/
-source = np.array(source, dtype = list)
+source = array(source, dtype = list)
 
 # Define placeholders
-gray = np.array([0, 1, 2], dtype = list)
-plates = np.array(list(range(3)), dtype = list)
-plateszoom = np.array(list(range(3)), dtype = list)
+gray = array([0, 1, 2], dtype = list)
+plates = array(list(range(3)), dtype = list)
+plateszoom = array(list(range(3)), dtype = list)
 
 # Convert to Grayscale
 for i in range(len(source)):
@@ -102,7 +102,7 @@ def calculate_slope(point1, point2):
     if delta_x != 0:
         slope = delta_y / delta_x
     else:
-        slope = np.inf
+        slope = inf
     
     return slope
 
@@ -112,7 +112,7 @@ def calculate_rotation_angle(point1, point2):
     delta_x = point2[0] - point1[0]
     
     # Calculate the angle using arctan
-    angle = np.arctan(delta_y, delta_x)
+    angle = arctan(delta_y, delta_x)
     
     return angle
 
@@ -127,8 +127,8 @@ def rotate_image(image, angle, center):
 
 def RotationProcess(image, point1, point2):
     slope = calculate_slope(point1, point2)
-    angle = np.arctan(slope)
-    angle = np.degrees(angle)
+    angle = arctan(slope)
+    angle = degrees(angle)
     center = (image.shape[1] // 2, image.shape[0] // 2)
     rotated_image = rotate_image(image, angle, center)
     return rotated_image
@@ -153,42 +153,44 @@ reader = eor.Reader(['ru'])
 # Some extraneous characters read
 rotated_plate_0_g = Gaussian(rotated_plate_0, 5)
 result_0 = reader.readtext(rotated_plate_0_g, paragraph = 'False')
-result_frame_0 = pd.DataFrame(result_0)
+result_frame_0 = DataFrame(result_0)
 
 # Second plate reads fine without additional processing. Gaussian added to remove slash.
 rotated_plate_1_g = Gaussian(rotated_plate_1, 5)
 result_1 = reader.readtext(rotated_plate_1, paragraph = 'False')
-result_frame_1 = pd.DataFrame(result_1)
+result_frame_1 = DataFrame(result_1)
 
 # Third plate requires additional work to read correctly.
 # Gaussian at 3 reads all but the first character and k=5 misreads the last two characters.
 rotated_plate_2_g = Gaussian(rotated_plate_2, 3)
 result_2 = reader.readtext(rotated_plate_2_g, paragraph = 'False')
-result_frame_2 = pd.DataFrame(result_2)
+result_frame_2 = DataFrame(result_2)
 
 titles = ['Russian Taxi', 'Two Russian Cars', 'Canadian Plate',
+          'Detection Result 1', 'Detection Result 2', 'Detection Result 3',
           'First Plate Extracted', 'Second Plate Extracted', 'Third Plate Extracted',
-          'Gaussian and Text (1)', 'Gaussian and Text (2)', 'Gaussian and Text (3)']
+          'Gaussian and Text 1', 'Gaussian and Text 2', 'Gaussian and Text 3']
 
-images = [plates_0, plates_1, plates_2,
+images = [image1, image2, image3,
+          plates_0, plates_1, plates_2,
           rotated_plate_0, rotated_plate_1, rotated_plate_2,
           rotated_plate_0_g, rotated_plate_1_g, rotated_plate_2_g]
 
 results = [result_frame_0[1][0], result_frame_1[1][0], result_frame_2[1][0]]
 
 for i in range(len(images)):
-    plt.subplot(3, 3, i + 1), plt.imshow(images[i], 'gray')
+    plt.subplot(4, 3, i + 1), plt.imshow(images[i], 'gray')
     plt.xticks([]), plt.yticks([])
     plt.title(titles[i])
     plt.tight_layout()
-    if i == 6:
+    if i == 9:
         plt.text(130, 60, results[0], color = 'white',
                  bbox = dict(facecolor = 'black', alpha = 0.65))
-    if i == 7:
-        plt.text(85, 25, results[1], color = 'white',
+    if i == 10:
+        plt.text(85, 22, results[1], color = 'white',
                  bbox = dict(facecolor = 'black', alpha = 0.65))
-    if i == 8:
-        plt.text(75, 15, results[2], color = 'white',
+    if i == 11:
+        plt.text(75, 16, results[2], color = 'white',
                  bbox = dict(facecolor = 'black', alpha = 0.65))
 plt.suptitle('Plate Extraction Results', fontsize = 25).set_color('#171819')
 plt.tight_layout()
