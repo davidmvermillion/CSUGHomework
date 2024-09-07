@@ -167,21 +167,30 @@ result_2 = reader.readtext(rotated_plate_2_g, paragraph = 'False')
 result_frame_2 = pd.DataFrame(result_2)
 
 
-# titles = ['Original', 'Canny', 'Sobel', 'Laplacian',
-#           'Gaussian Noise', 'Canny Noise', 'Sobel Noise', 'Laplacian Noise']
+titles = ['Russian Taxi', 'Two Russian Cars', 'Canadian Plate',
+          'First Plate Extracted', 'Second Plate Extracted', 'Third Plate Extracted',
+          'Gaussian and Text (1)', 'Gaussian and Text (2)', 'Gaussian and Text (3)']
 
 images = [plates_0, plates_1, plates_2,
-          rotated_plate_0, rotated_plate_1, rotated_plate_2]
+          rotated_plate_0, rotated_plate_1, rotated_plate_2,
+          rotated_plate_0_g, rotated_plate_1_g, rotated_plate_2_g]
 
-# Convert BGR to RGB
-# for i in range(len(plates)):
-#     plates[i] = cv2.cvtColor(plates[i], cv2.COLOR_BGR2RGB)
+results = [result_frame_0[1][0], result_frame_1[1][0], result_frame_2[1][0]]
 
-for i in range(6):
-    plt.subplot(3, 2, i + 1), plt.imshow(images[i], 'gray')
+for i in range(len(images)):
+    plt.subplot(3, 3, i + 1), plt.imshow(images[i], 'gray')
     plt.xticks([]), plt.yticks([])
-    # plt.title(titles[i])
+    plt.title(titles[i])
     plt.tight_layout()
-# plt.suptitle('Edge Detection Results', fontsize = 25).set_color('#171819')
+    if i == 6:
+        plt.text(130, 60, results[0], color = 'white',
+                 bbox = dict(facecolor = 'black', alpha = 0.65))
+    if i == 7:
+        plt.text(85, 25, results[1], color = 'white',
+                 bbox = dict(facecolor = 'black', alpha = 0.65))
+    if i == 8:
+        plt.text(75, 15, results[2], color = 'white',
+                 bbox = dict(facecolor = 'black', alpha = 0.65))
+plt.suptitle('Plate Extraction Results', fontsize = 25).set_color('#171819')
 plt.tight_layout()
 plt.show()
