@@ -150,6 +150,7 @@ def Gaussian(item, kernel):
 reader = eor.Reader(['ru'])
 
 # First plate needs blurring to read correctly
+# Some extraneous characters read
 rotated_plate_0_g = Gaussian(rotated_plate_0, 5)
 result_0 = reader.readtext(rotated_plate_0_g, paragraph = 'False')
 result_frame_0 = pd.DataFrame(result_0)
@@ -159,9 +160,12 @@ rotated_plate_1_g = Gaussian(rotated_plate_1, 5)
 result_1 = reader.readtext(rotated_plate_1, paragraph = 'False')
 result_frame_1 = pd.DataFrame(result_1)
 
-# Third plate requires ____
+# Third plate requires additional work to read correctly.
+# Gaussian at 3 reads all but the first character and k=5 misreads the last two characters.
+rotated_plate_2_g = Gaussian(rotated_plate_2, 3)
+result_2 = reader.readtext(rotated_plate_2_g, paragraph = 'False')
+result_frame_2 = pd.DataFrame(result_2)
 
-# Figure out how to display results once confirmed that they work
 
 # titles = ['Original', 'Canny', 'Sobel', 'Laplacian',
 #           'Gaussian Noise', 'Canny Noise', 'Sobel Noise', 'Laplacian Noise']
