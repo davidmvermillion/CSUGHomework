@@ -90,7 +90,6 @@ plates_2 = CarplateDetect(gray[2])
 # Read Plates in Extracted Images
 # https://medium.com/@draj0718/text-recognition-and-extraction-in-images-93d71a337fc8
 
-
 # Rotation Processing
 # https://medium.com/@maritaganta/how-to-properly-rotate-an-image-with-opencv-475e44a252f6
 # Functions
@@ -147,6 +146,7 @@ def Gaussian(item, kernel):
     return blur
 
 # EasyOCR hint from: https://medium.com/@draj0718/text-recognition-and-extraction-in-images-93d71a337fc8
+# Chose EasyOCR because most demos used Tesseract and I wanted to do something different
 reader = eor.Reader(['ru'])
 
 # First plate needs blurring to read correctly
@@ -165,7 +165,6 @@ result_frame_1 = pd.DataFrame(result_1)
 rotated_plate_2_g = Gaussian(rotated_plate_2, 3)
 result_2 = reader.readtext(rotated_plate_2_g, paragraph = 'False')
 result_frame_2 = pd.DataFrame(result_2)
-
 
 titles = ['Russian Taxi', 'Two Russian Cars', 'Canadian Plate',
           'First Plate Extracted', 'Second Plate Extracted', 'Third Plate Extracted',
