@@ -166,6 +166,11 @@ rotated_plate_2_g = Gaussian(rotated_plate_2, 3)
 result_2 = reader.readtext(rotated_plate_2_g, paragraph = 'False')
 result_frame_2 = DataFrame(result_2)
 
+# Switch source images to RGB for presentating
+image1 = cv2.cvtColor(image1, cv2.COLOR_BGR2RGB)
+image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
+image3 = cv2.cvtColor(image3, cv2.COLOR_BGR2RGB)
+
 titles = ['Russian Taxi', 'Two Russian Cars', 'Canadian Plate',
           'Detection Result 1', 'Detection Result 2', 'Detection Result 3',
           'First Plate Extracted', 'Second Plate Extracted', 'Third Plate Extracted',
