@@ -9,20 +9,32 @@ chdir(dirname(abspath(__file__)))
 
 # Request user input
 # https://www.geeksforgeeks.org/taking-multiple-inputs-from-user-in-python/
+# https://www.geeksforgeeks.org/how-to-get-first-n-items-from-a-list-in-python/
 initial = list(map(int, input("Enter 4 to 8 integers separated by spaces: ").split()))
+# Force the maximum length to 8
+coefficients = initial[slice(8)]
 
 # Create training data
 train_set_limit = 1000
 train_set_count = 100
 
-train_input = list()
-train_output = list()
-variable_names_full = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-variables = list()
+# train_input = list()
+# train_output = list()
+# variable_names_full = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+# variables = list()
 
-for i in range(train_set_count):
-    for k in len(range(initial)):
-        variables[i] = randint(0, train_set_limit)
+if len(coefficients) == 8:
+    train_in, train_out = nf.eightNumbers(train_set_count, train_set_limit, coefficients)
+elif len(coefficients) == 7:
+    train_in, train_out = nf.sevenNumbers(train_set_count, train_set_limit, coefficients)
+elif len(coefficients) == 6:
+    train_in, train_out = nf.sixNumbers(train_set_count, train_set_limit, coefficients)
+elif len(coefficients) == 5:
+    train_in, train_out = nf.fiveNumbers(train_set_count, train_set_limit, coefficients)
+elif len(coefficients) == 4:
+    train_in, train_out = nf.fourNumbers(train_set_count, train_set_limit, coefficients)
+else:
+    print('\nInvalid entry. Please re-run the program.\n')
 
 # possibly if/else statements for each case
 
