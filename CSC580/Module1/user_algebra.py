@@ -16,6 +16,7 @@ train_set_count = 100
 
 train_input = list()
 train_output = list()
+variable_names_full = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 variables = list()
 
 for i in range(train_set_count):
