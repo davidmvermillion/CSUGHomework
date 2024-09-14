@@ -3,6 +3,7 @@ from random import randint
 from os import chdir
 from os.path import abspath, dirname
 import numberfunctions as nf
+from numpy import sum, multiply
 
 # Force script execution directory to current path
 chdir(dirname(abspath(__file__)))
@@ -39,8 +40,10 @@ predictor.fit(X = train_in, y = train_out)
 second = list(map(int, input("Your model was trained with {} coefficients.\nEnter {} integers separated by spaces: ".format(len(coefficients), len(coefficients))).split()))
 X_test = [second]
 outcome = predictor.predict(X = X_test)
-coefficients = predictor.coef_
-print('Outcome : {}\nCoefficients : {}'.format(outcome, coefficients))
+# coefficients = predictor.coef_
+# https://www.geeksforgeeks.org/python-multiply-two-list/
+actual = sum(multiply(coefficients, second))
+print('Model Outcome : {}\nActual Value : {}'.format(outcome, actual))
 
 '''
 For this assignment, implement a Python program that allows the user to enter coefficients
