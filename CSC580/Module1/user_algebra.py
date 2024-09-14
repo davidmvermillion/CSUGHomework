@@ -2,6 +2,7 @@ from sklearn.linear_model import LinearRegression
 from random import randint
 from os import chdir
 from os.path import abspath, dirname
+import numberfunctions as nf
 
 # Force script execution directory to current path
 chdir(dirname(abspath(__file__)))
