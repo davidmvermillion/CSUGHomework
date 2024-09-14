@@ -18,11 +18,6 @@ coefficients = initial[slice(8)]
 train_set_limit = 1000
 train_set_count = 100
 
-# train_input = list()
-# train_output = list()
-# variable_names_full = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-# variables = list()
-
 if len(coefficients) == 8:
     train_in, train_out = nf.eightNumbers(train_set_count, train_set_limit, coefficients)
 elif len(coefficients) == 7:
@@ -36,7 +31,16 @@ elif len(coefficients) == 4:
 else:
     print('\nInvalid entry. Please re-run the program.\n')
 
-# possibly if/else statements for each case
+# Train model
+predictor = LinearRegression(n_jobs = -1)
+predictor.fit(X = train_in, y = train_out)
+
+# Test model
+second = list(map(int, input("Your model was trained with {} coefficients.\nEnter {} integers separated by spaces: ".format(len(coefficients), len(coefficients))).split()))
+X_test = [second]
+outcome = predictor.predict(X = X_test)
+coefficients = predictor.coef_
+print('Outcome : {}\nCoefficients : {}'.format(outcome, coefficients))
 
 '''
 For this assignment, implement a Python program that allows the user to enter coefficients
