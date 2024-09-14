@@ -1,5 +1,4 @@
 from sklearn.linear_model import LinearRegression
-from random import randint
 from os import chdir
 from os.path import abspath, dirname
 import numberfunctions as nf
@@ -8,7 +7,7 @@ from numpy import sum, multiply
 # Force script execution directory to current path
 chdir(dirname(abspath(__file__)))
 
-# Request user input
+# Request initial user input
 # https://www.geeksforgeeks.org/taking-multiple-inputs-from-user-in-python/
 # https://www.geeksforgeeks.org/how-to-get-first-n-items-from-a-list-in-python/
 initial = list(map(int, input("Enter 4 to 8 integers separated by spaces: ").split()))
@@ -46,15 +45,8 @@ else:
     pass
 X_test = [second]
 outcome = predictor.predict(X = X_test)
-# coefficients = predictor.coef_
+
+# Display results
 # https://www.geeksforgeeks.org/python-multiply-two-list/
 actual = sum(multiply(coefficients, second))
 print('Model Outcome : {}\nActual Value : {}'.format(outcome, actual))
-
-'''
-For this assignment, implement a Python program that allows the user to enter coefficients
-for a linear equation that contains between four and eight variables.
-Next, train a model that “fits” the linear equation.
-Finally, prompt the user for a set of input numbers to test the model.
-Print out the predicted value and the actual value.
-'''
