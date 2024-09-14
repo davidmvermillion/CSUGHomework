@@ -64,8 +64,9 @@ def fiveNumbers(train_count, train_limit, coefficients):
         b = randint(0, train_limit)
         c = randint(0, train_limit)
         d = randint(0, train_limit)
-        output = (coefficients[0]*a) + (coefficients[1]*b) + (coefficients[2]*c) + (coefficients[3]*d)
-        train_input.append([a, b, c, d])
+        e = randint(0, train_limit)
+        output = (coefficients[0]*a) + (coefficients[1]*b) + (coefficients[2]*c) + (coefficients[3]*d) + (coefficients[4]*e)
+        train_input.append([a, b, c, d, e])
         train_output.append(output)
 
     return train_input, train_output
