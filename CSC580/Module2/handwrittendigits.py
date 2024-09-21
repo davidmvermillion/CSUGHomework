@@ -1,8 +1,5 @@
 # Initial code from Module 2 Critical Thinking Page
 # https://csuglobal.instructure.com/courses/99352/assignments/1879939?module_item_id=5094314
-from random import randint
-from sklearn.linear_model import LinearRegression
-from pickle import dump
 from os import chdir
 from os.path import abspath, dirname
 import tensorflow as tf
@@ -179,13 +176,14 @@ Next, train the network in 20 steps (or "epochs") with batches of 100 samples fr
 After you train your model, answer the following questions.
 You may have to write a Python script to answer a particular question.
 
-What is the accuracy of the model?
-What are some of the misclassified images?
-How is the accuracy affected by using more hidden neurons? Fewer hidden neurons?
-How is the accuracy affected by using different learning rates? Try a range of at least four values.
-How is accuracy affected by adding another hidden layer?
-How is accuracy affected by using different batch sizes? Try at least three different batch sizes.
-What is the best accuracy you can get from this multi-layer perceptron?
+1. What is the accuracy of the model?
+2. What are some of the misclassified images?
+3. How is the accuracy affected by using more hidden neurons? Fewer hidden neurons?
+4. How is the accuracy affected by using different learning rates? Try a range of at least four values.
+5. How is accuracy affected by adding another hidden layer?
+6. How is accuracy affected by using different batch sizes? Try at least three different batch sizes.
+7. What is the best accuracy you can get from this multi-layer perceptron?
+
 Summarize your findings in a Word document.
 For each finding, include the Python code and screenshots of the run-time output.
 Submit your Word document and Python source files as a zip file with the name:
