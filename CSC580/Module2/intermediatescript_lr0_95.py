@@ -62,15 +62,15 @@ input_layer = tf.matmul(input_images, input_weights)
 hidden_layer = tf.nn.relu(input_layer + input_biases)
 digit_weights = tf.matmul(hidden_layer, hidden_weights) + hidden_biases
 loss_function = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=digit_weights, labels=target_labels))
-optimizer = tf.train.GradientDescentOptimizer(0.7).minimize(loss_function)
+optimizer = tf.train.GradientDescentOptimizer(0.95).minimize(loss_function)
 correct_prediction = tf.equal(tf.argmax(digit_weights,1), tf.argmax(target_labels,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 # Model Training
 sess = tf.InteractiveSession()
 tf.global_variables_initializer().run()
-EPOCH = 50
-BATCH_SIZE = 75
+EPOCH = 20
+BATCH_SIZE = 100
 TRAIN_DATASIZE,_ = x_train.shape
 PERIOD = TRAIN_DATASIZE//BATCH_SIZE
 

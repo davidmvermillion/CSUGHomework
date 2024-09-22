@@ -69,7 +69,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 # Model Training
 sess = tf.InteractiveSession()
 tf.global_variables_initializer().run()
-EPOCH = 50
+EPOCH = 20
 BATCH_SIZE = 75
 TRAIN_DATASIZE,_ = x_train.shape
 PERIOD = TRAIN_DATASIZE//BATCH_SIZE
