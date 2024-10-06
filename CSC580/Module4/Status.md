@@ -1,5 +1,7 @@
 # Critical Thinking
-- Core code copied
+- Core notebook works
+- Images retrieved
+- Paper *NOT* written
 
 # Portfolio Milestone
 - Core code copied
